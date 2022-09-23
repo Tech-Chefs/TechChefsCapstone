@@ -1,8 +1,13 @@
+.homebody {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 0;
 
+}
 
 
 h1 {
   font-family: 'Libre Baskerville', serif;
-  text-align: center;
   padding: 20px;
 }
