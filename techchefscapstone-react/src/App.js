@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import NotFound from './components/NotFound';
 import GroceryList from './components/GroceryList';
 import RecipeList from './components/RecipeList';
+import RecipeForm from './components/RecipeForm';
 
 function App() {
   return (
