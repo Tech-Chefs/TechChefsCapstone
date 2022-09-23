@@ -3,6 +3,8 @@ import Home from './components/Home';
 import LoginPage from './components/LoginPage';
 import Navbar from './components/Navbar';
 import NotFound from './components/NotFound';
+import GroceryList from './components/GroceryList';
+import RecipeList from './components/RecipeList';
 
 function App() {
   return (
@@ -21,8 +23,16 @@ function App() {
           <Route path="/techchefs" exact>
           </Route>
 
-          <Route>
+          <Route path="/loginpage">
             <LoginPage/>
+          </Route>     
+
+          <Route path="/grocerylist">
+            <GroceryList/>
+          </Route>     
+
+          <Route path="/recipelist">
+            <RecipeList/>
           </Route>     
 
           <Route>
