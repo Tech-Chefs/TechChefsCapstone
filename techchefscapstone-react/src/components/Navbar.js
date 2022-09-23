@@ -5,7 +5,10 @@ function Navbar(){
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <ul className="navbar-nav">
                 <li><Link className="nav-link" to="/">Home</Link></li>
-                <li><Link className="nav-link" to="/fieldagent">Field Agents</Link></li>
+                <li><Link className="nav-link" to="/">Grocery Lists</Link></li>
+                <li><Link className="nav-link" to="/">Recipe List</Link></li>
+                <input type="text" placeholder="Search.."></input>
+                <li><Link className="nav-link" to="/loginpage">Login</Link></li>
             </ul>
         </nav>
     );
