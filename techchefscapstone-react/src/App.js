@@ -1,8 +1,9 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './components/Home';
-import Navbar from './components/Navbar';
 import LoginPage from './components/LoginPage';
+import Navbar from './components/Navbar';
 import NotFound from './components/NotFound';
+import GroceryList from './components/GroceryList';
 import RecipeList from './components/RecipeList';
 import RecipeForm from './components/RecipeForm';
 
@@ -18,12 +19,22 @@ function App() {
           </Route>    
 
           <Route path={["/techchefs/add","/techchefs/edit/:id"]}>
-            <RecipeForm/>
           </Route>
 
           <Route path="/techchefs" exact>
-            <RecipeList/>
           </Route>
+
+          <Route path="/loginpage">
+            <LoginPage/>
+          </Route>     
+
+          <Route path="/grocerylist">
+            <GroceryList/>
+          </Route>     
+
+          <Route path="/recipelist">
+            <RecipeList/>
+          </Route>     
 
           <Route>
             <NotFound/>
