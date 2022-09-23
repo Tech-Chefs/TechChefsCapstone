@@ -4,12 +4,12 @@ import Navbar from './components/Navbar';
 import LoginPage from './components/LoginPage';
 import NotFound from './components/NotFound';
 import RecipeList from './components/RecipeList';
+import RecipeForm from './components/RecipeForm';
 
 function App() {
   return (
     <>
       <Router>
-        <h1>Tech Chefs</h1>
         <Navbar/>
         <Switch>
 
