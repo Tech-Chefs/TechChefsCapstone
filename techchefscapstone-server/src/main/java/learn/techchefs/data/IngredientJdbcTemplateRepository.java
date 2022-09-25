@@ -134,4 +134,9 @@ public class IngredientJdbcTemplateRepository {
 
         return rowsAffected > 0;
     }
+
+    public boolean deleteById (int id) {
+        final String sql = "delete from ingredient where id = ?";
+        return jdbcTemplate.update(sql, id) > 0;
+    }
 }
