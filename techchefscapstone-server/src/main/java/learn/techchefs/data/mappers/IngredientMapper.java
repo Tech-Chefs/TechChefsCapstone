@@ -17,20 +17,29 @@ public class IngredientMapper implements RowMapper <Ingredient> {
         ingredient.setNutBased(rs.getBoolean("nut_based"));
         ingredient.setKosher(rs.getBoolean("kosher"));
         if (rs.getBoolean("contains_gluten")) {
-            if (rs.getBoolean("contains_soy")) ingredient.setContainsGluten(new boolean[] {true, true});
-            else ingredient.setContainsGluten(new boolean[] {false, true});
+            ingredient.setContainsGluten(true);
+            ingredient.setContainsSoy(rs.getBoolean("contains_soy"));
         }
-        else ingredient.setContainsGluten(new boolean[] {false, false});
+        else {
+            ingredient.setContainsGluten(false);
+            ingredient.setContainsSoy(false);
+        }
         if (rs.getBoolean("animal_based")) {
+            ingredient.setAnimalBased(true);
             if (rs.getBoolean("meat")) {
-                if (rs.getBoolean("fish")) ingredient.setAnimalBased(new boolean[] {true, true});
-                else ingredient.setAnimalBased(new boolean[] {true, false});
+                ingredient.setMeat(true);
+                ingredient.setFish(rs.getBoolean("fish"));
             }
-            else ingredient.setAnimalBased(new boolean[] {false, true});
+            else {
+                ingredient.setMeat(false);
+                ingredient.setFish(false);
+            }
             ingredient.setContainsEgg(rs.getBoolean("contains_egg"));
         }
         else {
-            ingredient.setAnimalBased(new boolean[] {false, false});
+            ingredient.setAnimalBased(false);
+            ingredient.setMeat(false);
+            ingredient.setFish(false);
             ingredient.setContainsEgg(false);
         }
         return ingredient;

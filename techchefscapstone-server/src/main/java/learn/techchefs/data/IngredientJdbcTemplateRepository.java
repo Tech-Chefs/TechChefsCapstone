@@ -72,33 +72,23 @@ public class IngredientJdbcTemplateRepository {
             statement.setString(1, ingredient.getName());
             statement.setBoolean(2,ingredient.isContainsDairy());
             statement.setBoolean(3,ingredient.isNutBased());
-            boolean [] animalBased = ingredient.getAnimalBased();
-            if (animalBased [0]) {
-                statement.setBoolean(4, true);
-                if (animalBased[1]) statement.setBoolean(5, true);
-                else statement.setBoolean(5, false);
+            if(ingredient.getAnimalBased()) {
                 statement.setBoolean(6, true);
-                if (ingredient.isContainsEgg()) statement.setBoolean(9, true);
-                else statement.setBoolean(9, false);
+                if (ingredient.isMeat()) {
+                    statement.setBoolean(4, true);
+                    statement.setBoolean(5, ingredient.isFish());
+                }
+                statement.setBoolean(9, ingredient.isContainsEgg());
             }
             else {
+                statement.setBoolean(6, false);
                 statement.setBoolean(4, false);
                 statement.setBoolean(5, false);
-                if (animalBased[1]) {
-                    statement.setBoolean(6, true);
-                    if (ingredient.isContainsEgg()) statement.setBoolean(9, true);
-                    else statement.setBoolean(9, false);
-                }
-                else {
-                    statement.setBoolean(6, false);
-                    statement.setBoolean(9, false);
-                }
+                statement.setBoolean(9, false);
             }
-            boolean [] containsGluten = ingredient.getContainsGluten();
-            if (containsGluten [1]) {
+            if (ingredient.getContainsGluten()) {
                 statement.setBoolean(7, true);
-                if (containsGluten[0]) statement.setBoolean(10, true);
-                else statement.setBoolean(10, false);
+                statement.setBoolean(10, ingredient.isContainsSoy());
             }
             else {
                 statement.setBoolean(7, false);

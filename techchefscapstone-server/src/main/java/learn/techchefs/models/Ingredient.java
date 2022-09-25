@@ -8,8 +8,11 @@ public class Ingredient {
     private boolean nutBased;
     private boolean isKosher;
     private boolean containsEgg;
-    private boolean [] containsGluten; //00: gluten-free, 01: contains gluten (no soy), 11: contains soy
-    private boolean [] animalBased; //00: vegan, 01: vegetarian, 10: meat, 11: fish
+    private boolean  containsGluten;
+    private boolean containsSoy;
+    private boolean animalBased;
+    private boolean isMeat;
+    private boolean isFish;
 
     public Ingredient () {}
 
@@ -29,11 +32,11 @@ public class Ingredient {
         this.containsEgg = containsEgg;
     }
 
-    public boolean[] getContainsGluten() {
+    public boolean getContainsGluten() {
         return containsGluten;
     }
 
-    public void setContainsGluten(boolean[] containsGluten) {
+    public void setContainsGluten(boolean containsGluten) {
         this.containsGluten = containsGluten;
     }
 
@@ -81,11 +84,43 @@ public class Ingredient {
         this.nutBased = nutBased;
     }
 
-    public boolean[] getAnimalBased() {
+    public boolean getAnimalBased() {
         return animalBased;
     }
 
-    public void setAnimalBased(boolean[] animalBased) {
+    public void setAnimalBased(boolean animalBased) {
         this.animalBased = animalBased;
+    }
+
+    public boolean isContainsGluten() {
+        return containsGluten;
+    }
+
+    public boolean isContainsSoy() {
+        return containsSoy;
+    }
+
+    public void setContainsSoy(boolean containsSoy) {
+        this.containsSoy = containsSoy;
+    }
+
+    public boolean isAnimalBased() {
+        return animalBased;
+    }
+
+    public boolean isMeat() {
+        return isMeat;
+    }
+
+    public void setMeat(boolean meat) {
+        isMeat = meat;
+    }
+
+    public boolean isFish() {
+        return isFish;
+    }
+
+    public void setFish(boolean fish) {
+        isFish = fish;
     }
 }
