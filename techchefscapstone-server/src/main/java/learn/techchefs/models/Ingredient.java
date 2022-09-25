@@ -16,6 +16,10 @@ public class Ingredient {
 
     public Ingredient () {}
 
+    public Ingredient (int id) {
+        this.id = id;
+    }
+
     public boolean isKosher() {
         return isKosher;
     }
@@ -38,10 +42,6 @@ public class Ingredient {
 
     public void setContainsGluten(boolean containsGluten) {
         this.containsGluten = containsGluten;
-    }
-
-    public Ingredient (int id) {
-        this.id = id;
     }
 
     public int getId() {

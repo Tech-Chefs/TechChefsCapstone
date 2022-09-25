@@ -104,4 +104,34 @@ public class IngredientJdbcTemplateRepository {
 
         return ingredient;
     }
+
+    public boolean update (Ingredient ingredient) {
+        final String sql = "update ingredient set " +
+                    "name = ?, " +
+                    "contains_dairy = ?, " +
+                    "nut_based = ?, " +
+                    "meat = ?, " +
+                    "fish = ?, " +
+                    "animal_based = ?, " +
+                    "contains_gluten = ?, " +
+                    "kosher = ?, " +
+                    "contains_egg = ?, " +
+                    "contains_soy = ? " +
+                "where id = ?";
+
+        int rowsAffected = jdbcTemplate.update(sql,
+                ingredient.getName(),
+                ingredient.isContainsDairy(),
+                ingredient.isNutBased(),
+                ingredient.isMeat(),
+                ingredient.isFish(),
+                ingredient.getAnimalBased(),
+                ingredient.getContainsGluten(),
+                ingredient.isKosher(),
+                ingredient.isContainsEgg(),
+                ingredient.isContainsSoy(),
+                ingredient.getId());
+
+        return rowsAffected > 0;
+    }
 }
