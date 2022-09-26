@@ -1,10 +1,10 @@
 package learn.techchefs.models;
 
 public class RecipeIngredient {
-    Ingredient ingredient;
-    Measurement measurement;
-    boolean isOptional;
-    String preparation;
+    private Ingredient ingredient;
+    private Measurement measurement;
+    private boolean isOptional;
+    private String preparation;
 
     public Ingredient getIngredient() {
         return ingredient;
