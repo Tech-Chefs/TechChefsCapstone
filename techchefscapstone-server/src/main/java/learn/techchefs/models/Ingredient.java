@@ -1,9 +1,13 @@
 package learn.techchefs.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Ingredient {
     private int id;
     private String name;
-    private Ingredient parent;
+    private int parentId;
+    private List <Ingredient> subIngredients;
     private boolean containsDairy;
     private boolean nutBased;
     private boolean isKosher;
@@ -14,10 +18,28 @@ public class Ingredient {
     private boolean isMeat;
     private boolean isFish;
 
-    public Ingredient () {}
+    public Ingredient () {
+        subIngredients = new ArrayList<>();
+    }
 
-    public Ingredient (int id) {
-        this.id = id;
+    public int getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(int parentId) {
+        this.parentId = parentId;
+    }
+
+    public List<Ingredient> getSubIngredients() {
+        return subIngredients;
+    }
+
+    public void addSubIngredient(Ingredient ingredient) {
+        subIngredients.add(ingredient);
+    }
+
+    public void setSubIngredients (List <Ingredient> ingredients) {
+        subIngredients = ingredients;
     }
 
     public boolean isKosher() {
@@ -58,14 +80,6 @@ public class Ingredient {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Ingredient getParent() {
-        return parent;
-    }
-
-    public void setParent(Ingredient parent) {
-        this.parent = parent;
     }
 
     public boolean isContainsDairy() {

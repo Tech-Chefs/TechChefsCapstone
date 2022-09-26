@@ -35,8 +35,30 @@ public class IngredientJdbcTemplateRepository {
         List <Ingredient> all = jdbcTemplate.query(sql, new IngredientMapper());
         HashMap <Integer, Ingredient> allMap = new HashMap<>();
         for (Ingredient ingredient : all) allMap.put(ingredient.getId(), ingredient);
-        for (Ingredient ingredient: all) if (ingredient.getParent() != null) ingredient.setParent(allMap.get
-                (ingredient.getParent().getId()));
+        for (Ingredient ingredient: allMap.values()) {
+            int parentId = ingredient.getParentId();
+            if (parentId > 0) allMap.get(parentId).addSubIngredient(ingredient);
+        }
+        return all;
+    }
+
+    public List <Ingredient> findByCategory (int parentId) {
+        final String sql = "select " +
+                    "id, " +
+                    "name, " +
+                    "parent_id, " +
+                    "contains_dairy, " +
+                    "nut_based, " +
+                    "meat, " +
+                    "fish, " +
+                    "animal_based, " +
+                    "contains_gluten, " +
+                    "kosher, " +
+                    "contains_egg, " +
+                    "contains_soy " +
+                "from ingredient where parent_id = ?";
+        List <Ingredient> all = jdbcTemplate.query(sql, new IngredientMapper());
+        for (Ingredient ingredient : all) ingredient.setSubIngredients(findByCategory(ingredient.getParentId()));
         return all;
     }
 
@@ -57,8 +79,7 @@ public class IngredientJdbcTemplateRepository {
                 "from ingredient where id = ?";
         Ingredient ingredient = jdbcTemplate.query(sql, new IngredientMapper(), id).stream()
                 .findFirst().orElse(null);
-        if (ingredient != null && ingredient.getParent() != null) ingredient.setParent(findById
-                (ingredient.getParent().getId()));
+        ingredient.setSubIngredients(findByCategory(ingredient.getParentId()));
         return ingredient;
     }
 
