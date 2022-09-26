@@ -1,4 +1,4 @@
-package learn.techchefs.data;
+package learn.techchefs.models;
 
 public class Unit {
     private int id;
