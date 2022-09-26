@@ -6,14 +6,15 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
 
-public class UnitJdbcTemplateRepository {
+public class UnitJdbcTemplateRepository implements UnitRepository {
     private final JdbcTemplate jdbcTemplate;
 
     public UnitJdbcTemplateRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<Unit> findAll () {
+    @Override
+    public List<Unit> findAll() {
         final String sql = "select " +
                     "id, " +
                     "long_name, " +
