@@ -10,14 +10,15 @@ import java.sql.Statement;
 import java.util.HashMap;
 import java.util.List;
 
-public class IngredientJdbcTemplateRepository {
+public class IngredientJdbcTemplateRepository implements IngredientRepository {
     private final JdbcTemplate jdbcTemplate;
 
     public IngredientJdbcTemplateRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List <Ingredient> findAll () {
+    @Override
+    public List <Ingredient> findAll() {
         final String sql = "select " +
                     "id, " +
                     "name, " +
@@ -42,7 +43,8 @@ public class IngredientJdbcTemplateRepository {
         return all;
     }
 
-    public List <Ingredient> findByCategory (int parentId) {
+    @Override
+    public List <Ingredient> findByCategory(int parentId) {
         final String sql = "select " +
                     "id, " +
                     "name, " +
@@ -62,7 +64,8 @@ public class IngredientJdbcTemplateRepository {
         return all;
     }
 
-    public Ingredient findById (int id) {
+    @Override
+    public Ingredient findById(int id) {
         final String sql = "select " +
                     "id, " +
                     "name, " +
@@ -83,7 +86,8 @@ public class IngredientJdbcTemplateRepository {
         return ingredient;
     }
 
-    public Ingredient add (Ingredient ingredient) {
+    @Override
+    public Ingredient add(Ingredient ingredient) {
         final String sql = "insert into ingredient (name, contains_dairy, nut_based, meat, fish, animal_based, " +
                 "contains_gluten, kosher, contains_egg, contains_soy) values " +
                 "(?,?,?,?,?,?,?,?,?,?)";
@@ -126,7 +130,8 @@ public class IngredientJdbcTemplateRepository {
         return ingredient;
     }
 
-    public boolean update (Ingredient ingredient) {
+    @Override
+    public boolean update(Ingredient ingredient) {
         final String sql = "update ingredient set " +
                     "name = ?, " +
                     "contains_dairy = ?, " +
@@ -156,7 +161,8 @@ public class IngredientJdbcTemplateRepository {
         return rowsAffected > 0;
     }
 
-    public boolean deleteById (int id) {
+    @Override
+    public boolean deleteById(int id) {
         final String sql = "delete from ingredient where id = ?";
         return jdbcTemplate.update(sql, id) > 0;
     }
