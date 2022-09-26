@@ -13,7 +13,7 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.Map;
 
-public class RecipeIngredientJdbcTemplateRepository {
+public class RecipeIngredientJdbcTemplateRepository implements RecipeIngredientRepository {
     private final JdbcTemplate jdbcTemplate;
     private Map <Integer, Ingredient> ingredients;
     private final Map <Integer, Unit> units;
@@ -25,11 +25,13 @@ public class RecipeIngredientJdbcTemplateRepository {
         this.units = units;
     }
 
+    @Override
     public void setIngredients(Map<Integer, Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
 
-    public List <RecipeIngredient> findByRecipe (int recipeId) {
+    @Override
+    public List <RecipeIngredient> findByRecipe(int recipeId) {
         final String sql = "select " +
                     "ingredient_id, " +
                     "quantity, " +
@@ -41,7 +43,8 @@ public class RecipeIngredientJdbcTemplateRepository {
         return jdbcTemplate.query(sql, new RecipeIngredientMapper(ingredients, units), recipeId);
     }
 
-    public void addByRecipe (int recipeId, List <RecipeIngredient> recipeIngredients) {
+    @Override
+    public void addByRecipe(int recipeId, List<RecipeIngredient> recipeIngredients) {
         final String sql = "insert into recipe_ingredient " +
                     "(recipe_id, ingredient_id, quantity, unit_id, optional, preparation) values " +
                 "(?, ?, ?, ?, ?, ?)";
@@ -59,12 +62,14 @@ public class RecipeIngredientJdbcTemplateRepository {
         }, keyHolder);
     }
 
-    public boolean deleteByRecipe (int recipeId) {
+    @Override
+    public boolean deleteByRecipe(int recipeId) {
         final String sql = "delete from recipe_ingredient where recipe_id = ?";
         return jdbcTemplate.update(sql,recipeId) > 0;
     }
 
-    public boolean updateByRecipe (int recipeId, List <RecipeIngredient> recipeIngredients) {
+    @Override
+    public boolean updateByRecipe(int recipeId, List<RecipeIngredient> recipeIngredients) {
         if (!deleteByRecipe(recipeId)) return false;
         addByRecipe(recipeId, recipeIngredients);
         return true;
