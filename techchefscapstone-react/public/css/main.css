@@ -1,13 +1,31 @@
+/* HOME PAGE CSS */
+
+.navbar-nav {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.nav-link {
+  color: black;
+  font-size: 24px;
+}
+
+.nav-link:hover {
+  text-shadow: 0 0 3px black;
+  transition:.5s;
+  transform:translate(5px);
+  color:#314295
+}
+
 .homebody {
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin: 0;
-
+  margin-top: 325px;
 }
-
 
 h1 {
   font-family: 'Libre Baskerville', serif;
   padding: 20px;
+  font-size: 64px;
 }
