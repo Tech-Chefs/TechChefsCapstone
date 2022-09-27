@@ -3,6 +3,7 @@
 .navbar-nav {
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
 }
 
 .nav-link {
@@ -28,4 +29,52 @@ h1 {
   font-family: 'Libre Baskerville', serif;
   padding: 20px;
   font-size: 64px;
+}
+
+
+/* LOGIN PAGE CSS */
+
+.loginBody {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 200px;
+}
+
+.loginButton {
+  text-align: center;
+}
+
+/* PROFILE CSS */
+
+.profilePicture {
+  background-color: #314295;
+  height: 200px;
+ 
+}
+
+.bio {
+  background-color: blueviolet;
+  height: 200px;
+}
+
+.settingsGutter {
+  background-color: aqua;
+
+  height: 750px;
+}
+
+
+.viewport {
+  background-color: brown;
+  height: 750px;
+}
+
+.row {
+  margin: 20px 0px;
+}
+
+.profile {
+  text-align: center;
+  align-items: center ;
 }

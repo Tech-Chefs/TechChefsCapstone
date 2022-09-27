@@ -6,6 +6,7 @@ import NotFound from './components/NotFound';
 import GroceryList from './components/GroceryList';
 import RecipeList from './components/RecipeList';
 import RecipeForm from './components/RecipeForm';
+import ProfilePage from './components/ProfilePage';
 
 function App() {
   return (
@@ -24,15 +25,19 @@ function App() {
           <Route path="/techchefs" exact>
           </Route>
 
-          <Route path="/loginpage">
+          <Route path="/loginpage" exact>
             <LoginPage/>
-          </Route>     
+          </Route>
 
-          <Route path="/grocerylist">
+          <Route>
+            <ProfilePage/>
+          </Route>
+
+          <Route path="/grocerylist" exact>
             <GroceryList/>
           </Route>     
 
-          <Route path="/recipelist">
+          <Route path="/recipelist" exact>
             <RecipeList/>
           </Route>     
 
