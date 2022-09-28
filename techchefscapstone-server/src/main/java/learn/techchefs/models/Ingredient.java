@@ -2,6 +2,7 @@ package learn.techchefs.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Ingredient {
     private int id;
@@ -136,5 +137,37 @@ public class Ingredient {
 
     public void setFish(boolean fish) {
         isFish = fish;
+    }
+
+    @Override
+    public String toString() {
+        return "Ingredient{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", parentId=" + parentId +
+                ", subIngredients=" + subIngredients +
+                ", containsDairy=" + containsDairy +
+                ", nutBased=" + nutBased +
+                ", isKosher=" + isKosher +
+                ", containsEgg=" + containsEgg +
+                ", containsGluten=" + containsGluten +
+                ", containsSoy=" + containsSoy +
+                ", animalBased=" + animalBased +
+                ", isMeat=" + isMeat +
+                ", isFish=" + isFish +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ingredient that = (Ingredient) o;
+        return id == that.id && parentId == that.parentId && containsDairy == that.containsDairy && nutBased == that.nutBased && isKosher == that.isKosher && containsEgg == that.containsEgg && containsGluten == that.containsGluten && containsSoy == that.containsSoy && animalBased == that.animalBased && isMeat == that.isMeat && isFish == that.isFish && name.equals(that.name) && Objects.equals(subIngredients, that.subIngredients);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, parentId, subIngredients, containsDairy, nutBased, isKosher, containsEgg, containsGluten, containsSoy, animalBased, isMeat, isFish);
     }
 }

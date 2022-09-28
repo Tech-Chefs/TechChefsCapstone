@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -47,6 +48,7 @@ public class IngredientJdbcTemplateRepository implements IngredientRepository {
 
     @Override
     public List <Ingredient> findByCategory(int parentId) {
+        if (parentId <= 0) return new ArrayList<>();
         final String sql = "select " +
                     "id, " +
                     "name, " +
@@ -61,8 +63,8 @@ public class IngredientJdbcTemplateRepository implements IngredientRepository {
                     "contains_egg, " +
                     "contains_soy " +
                 "from ingredient where parent_id = ?";
-        List <Ingredient> all = jdbcTemplate.query(sql, new IngredientMapper());
-        for (Ingredient ingredient : all) ingredient.setSubIngredients(findByCategory(ingredient.getParentId()));
+        List <Ingredient> all = jdbcTemplate.query(sql, new IngredientMapper(), parentId);
+        for (Ingredient ingredient : all) ingredient.setSubIngredients(findByCategory(ingredient.getId()));
         return all;
     }
 
@@ -84,7 +86,7 @@ public class IngredientJdbcTemplateRepository implements IngredientRepository {
                 "from ingredient where id = ?";
         Ingredient ingredient = jdbcTemplate.query(sql, new IngredientMapper(), id).stream()
                 .findFirst().orElse(null);
-        ingredient.setSubIngredients(findByCategory(ingredient.getParentId()));
+        if (ingredient != null) ingredient.setSubIngredients(findByCategory(ingredient.getId()));
         return ingredient;
     }
 

@@ -3,9 +3,11 @@ package learn.techchefs.data;
 import learn.techchefs.data.mappers.UnitMapper;
 import learn.techchefs.models.Unit;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class UnitJdbcTemplateRepository implements UnitRepository {
     private final JdbcTemplate jdbcTemplate;
 
