@@ -107,10 +107,6 @@ public class Ingredient {
         this.animalBased = animalBased;
     }
 
-    public boolean isContainsGluten() {
-        return containsGluten;
-    }
-
     public boolean isContainsSoy() {
         return containsSoy;
     }
