@@ -15,29 +15,19 @@ import java.util.Map;
 
 public class RecipeIngredientJdbcTemplateRepository implements RecipeIngredientRepository {
     private final JdbcTemplate jdbcTemplate;
-    private Map <Integer, Ingredient> ingredients;
-    private final Map <Integer, Unit> units;
-
-    public RecipeIngredientJdbcTemplateRepository(JdbcTemplate jdbcTemplate, Map <Integer, Ingredient> ingredients,
-                                                  Map <Integer, Unit> units) {
+    public RecipeIngredientJdbcTemplateRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-        this.ingredients = ingredients;
-        this.units = units;
     }
 
     @Override
-    public void setIngredients(Map<Integer, Ingredient> ingredients) {
-        this.ingredients = ingredients;
-    }
-
-    @Override
-    public List <RecipeIngredient> findByRecipe(int recipeId) {
+    public List <RecipeIngredient> findByRecipe(Map <Integer, Ingredient> ingredients, Map <Integer, Unit> units,
+                                                int recipeId) {
         final String sql = "select " +
-                    "ingredient_id, " +
-                    "quantity, " +
-                    "unit_id, " +
-                    "optional, " +
-                    "preparation " +
+                "ingredient_id, " +
+                "quantity, " +
+                "unit_id, " +
+                "optional, " +
+                "preparation " +
                 "from recipe_ingredient " +
                 "where recipe_id = ?";
         return jdbcTemplate.query(sql, new RecipeIngredientMapper(ingredients, units), recipeId);
@@ -46,7 +36,7 @@ public class RecipeIngredientJdbcTemplateRepository implements RecipeIngredientR
     @Override
     public void addByRecipe(int recipeId, List<RecipeIngredient> recipeIngredients) {
         final String sql = "insert into recipe_ingredient " +
-                    "(recipe_id, ingredient_id, quantity, unit_id, optional, preparation) values " +
+                "(recipe_id, ingredient_id, quantity, unit_id, optional, preparation) values " +
                 "(?, ?, ?, ?, ?, ?)";
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         for (RecipeIngredient recipeIngredient : recipeIngredients) jdbcTemplate.update(connection -> {
@@ -75,3 +65,4 @@ public class RecipeIngredientJdbcTemplateRepository implements RecipeIngredientR
         return true;
     }
 }
+
