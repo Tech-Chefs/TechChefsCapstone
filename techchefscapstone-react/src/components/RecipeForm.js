@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 function RecipeForm() {
     return (
         <>
@@ -17,7 +19,9 @@ function RecipeForm() {
                     <div className="col-3"></div>
                     <div className="col-6">
                         <h2>Ingredients</h2>
-                        <section id="ingre">fwerf</section>
+                        <section id="ingre">
+                            <Link className="IngreButton btn btn-secondary" to="/ingredient">Add Ingredient</Link>
+                        </section>
                     </div>
                 </div>
                 <div className="row">

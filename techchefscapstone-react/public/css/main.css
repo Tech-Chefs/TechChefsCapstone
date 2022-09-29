@@ -110,9 +110,28 @@ h1 {
 #ingre {
   background-color: cornflowerblue;
   height: 300px;
+  display: flex;
+}
+
+.IngreButton {
+  align-self: flex-end;
+  margin: 10px;
+  justify-content: flex-end;
 }
 
 #direc {
   background-color: darkblue;
   height: 300px;
+}
+
+/* CREATE A RECIPE CSS */
+
+#ingreName {
+  background-color: #314295;
+  height: 60px;
+}
+
+#diet {
+  background-color: chartreuse;
+  height: 500px;
 }

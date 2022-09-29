@@ -1,4 +1,15 @@
 function Recipe() {
+
+    const RECIPE_DATA = [
+        {
+            id: 1,
+            name: "PB&J Sandwich",
+            description: "Peanut butter and fruit preserves—jelly—spread on bread.",
+
+        }
+    ]
+
+
     return (
         <>
             <div className="container-fluid">
@@ -13,8 +24,6 @@ function Recipe() {
                     <div className="col-9"><section id="instructions">Instructions</section></div>
                 </div>
             </div>
-
-
         </>
     )
 }

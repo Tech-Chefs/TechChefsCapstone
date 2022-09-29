@@ -8,6 +8,7 @@ import RecipeList from './components/RecipeList';
 import RecipeForm from './components/RecipeForm';
 import ProfilePage from './components/ProfilePage';
 import Recipe from './components/Recipe';
+import Ingredient from './components/Ingredient';
 
 function App() {
   return (
@@ -31,7 +32,7 @@ function App() {
             <LoginPage />
           </Route>
 
-          <Route path="profile" exact>
+          <Route path="/profile" exact>
             <ProfilePage />
           </Route>
 
@@ -45,6 +46,10 @@ function App() {
 
           <Route path="/recipe" exact>
             <Recipe />
+          </Route>
+
+          <Route path="/ingredient">
+            <Ingredient/>
           </Route>
 
           <Route>
