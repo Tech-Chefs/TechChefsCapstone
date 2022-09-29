@@ -7,46 +7,52 @@ import GroceryList from './components/GroceryList';
 import RecipeList from './components/RecipeList';
 import RecipeForm from './components/RecipeForm';
 import ProfilePage from './components/ProfilePage';
+import Recipe from './components/Recipe';
 
 function App() {
   return (
     <>
       <Router>
-        <Navbar/>
+        <Navbar />
         <Switch>
 
           <Route path="/" exact>
-            <Home/>
-          </Route>    
+            <Home />
+          </Route>
 
-          <Route path={["/techchefs/add","/techchefs/edit/:id"]}>
+          <Route path={["/techchefs/add", "/techchefs/edit/:id"]}>
+            <RecipeForm />
           </Route>
 
           <Route path="/techchefs" exact>
           </Route>
 
           <Route path="/loginpage" exact>
-            <LoginPage/>
+            <LoginPage />
           </Route>
 
-          <Route>
-            <ProfilePage/>
+          <Route path="profile" exact>
+            <ProfilePage />
           </Route>
 
           <Route path="/grocerylist" exact>
-            <GroceryList/>
-          </Route>     
+            <GroceryList />
+          </Route>
 
           <Route path="/recipelist" exact>
-            <RecipeList/>
-          </Route>     
+            <RecipeList />
+          </Route>
+
+          <Route path="/recipe" exact>
+            <Recipe />
+          </Route>
 
           <Route>
-            <NotFound/>
-          </Route>     
+            <NotFound />
+          </Route>
 
-        </Switch>       
-      </Router>      
+        </Switch>
+      </Router>
     </>
   );
 }

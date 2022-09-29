@@ -22,7 +22,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin-top: 325px;
+  margin-top: 275px;
 }
 
 h1 {
@@ -77,4 +77,42 @@ h1 {
 .profile {
   text-align: center;
   align-items: center ;
+}
+
+/* RECIPE CSS */
+#recipeCarousel {
+  background-color: aqua;
+  height: 300px;
+}
+
+#items {
+  background-color: aquamarine;
+  height: 400px;
+}
+
+#instructions {
+  background-color: blue;
+  height: 400px;
+}
+
+
+/* CREATE A RECIPE CSS */
+#recipeName {
+  background-color: #314295;
+  height: 60px;
+}
+
+#desc {
+  background-color: chartreuse;
+  height: 300px;
+}
+
+#ingre {
+  background-color: cornflowerblue;
+  height: 300px;
+}
+
+#direc {
+  background-color: darkblue;
+  height: 300px;
 }
