@@ -16,7 +16,8 @@ public class RecipeJdbcTemplateRepository implements RecipeRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List <Recipe> findAll () {
+    @Override
+    public List <Recipe> findAll() {
         final String sql = "select " +
                     "id, " +
                     "name, " +
@@ -25,7 +26,8 @@ public class RecipeJdbcTemplateRepository implements RecipeRepository {
         return jdbcTemplate.query(sql, new RecipeMapper());
     }
 
-    public Recipe findById (int id) {
+    @Override
+    public Recipe findById(int id) {
         final String sql = "select " +
                     "id, " +
                     "name, " +
@@ -36,7 +38,8 @@ public class RecipeJdbcTemplateRepository implements RecipeRepository {
                 .findFirst().orElse(null);
     }
 
-    public Recipe add (Recipe recipe) {
+    @Override
+    public Recipe add(Recipe recipe) {
         final String sql = "insert into recipe (name, description) values " +
                 "(?, ?)";
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
@@ -51,7 +54,8 @@ public class RecipeJdbcTemplateRepository implements RecipeRepository {
         return recipe;
     }
 
-    public boolean update (Recipe recipe) {
+    @Override
+    public boolean update(Recipe recipe) {
         final String sql = "update recipe set " +
                     "name = ?, " +
                     "description = ? " +
@@ -61,7 +65,8 @@ public class RecipeJdbcTemplateRepository implements RecipeRepository {
         return rowsAffected > 0;
     }
 
-    public boolean deleteById (int recipeId) {
+    @Override
+    public boolean deleteById(int recipeId) {
         final String sql = "delete from recipe where id = ?";
         int rowsAffected = jdbcTemplate.update(sql, recipeId);
         return rowsAffected > 0;

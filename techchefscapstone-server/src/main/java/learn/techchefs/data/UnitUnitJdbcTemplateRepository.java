@@ -8,40 +8,64 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class UnitUnitJdbcTemplateRepository implements UnitUnitRepository {
     private final JdbcTemplate jdbcTemplate;
-    private final Map <Integer, Unit> units;
 
-    public UnitUnitJdbcTemplateRepository(JdbcTemplate jdbcTemplate, Map <Integer, Unit> units) {
+    public UnitUnitJdbcTemplateRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-        this.units = units;
     }
 
     @Override
-    public Map <Unit, Measurement> findAll() {
+    public Map <Unit, List <Measurement>> findAll(Map <Integer, Unit> units) {
         final String sql = "select " +
                     "unit_id_1, " +
                     "unit_id_2, " +
                     "factor " +
                 "from unit_unit";
-        return jdbcTemplate.query(sql, new UnitUnitMapper (units)).stream()
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        Map <Unit, List <Measurement>> unitMeasurementMap = new HashMap<>();
+        List <Map.Entry <Unit, Measurement>> entryList = jdbcTemplate.query(sql, new UnitUnitMapper (units));
+        for (Map.Entry <Unit, Measurement> entry : entryList) {
+            Unit unit1 = entry.getKey();
+            Unit unit2 = entry.getValue().getUnit();
+            if (!unitMeasurementMap.containsKey(unit1)) unitMeasurementMap.put(unit1, new ArrayList<>());
+            if (!unitMeasurementMap.containsKey(unit2)) unitMeasurementMap.put(unit2, new ArrayList<>());
+            unitMeasurementMap.get(unit1).add(entry.getValue());
+            Measurement inverseMeasurement = new Measurement();
+            inverseMeasurement.setUnit(unit1);
+            inverseMeasurement.setQuantity(1.0 / entry.getValue().getQuantity());
+            unitMeasurementMap.get(unit2).add(inverseMeasurement);
+        }
+        return unitMeasurementMap;
     }
 
     @Override
-    public Map <Unit, Measurement> findByIngredient(int ingredientId) {
+    public Map <Unit, List <Measurement>> findByIngredient(Map <Integer, Unit> units, int ingredientId) {
+        Map <Unit, List <Measurement>> unitMeasurementMap = findAll(units);
         final String sql = "select " +
                     "unit_id_1, " +
                     "unit_id_2, " +
                     "factor " +
                 "from ingredient_unit_unit " +
                 "where ingredient_id = ?";
-        return jdbcTemplate.query(sql, new UnitUnitMapper (units), ingredientId).stream()
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        List <Map.Entry <Unit, Measurement>> entryList =
+                jdbcTemplate.query(sql, new UnitUnitMapper (units), ingredientId);
+        for (Map.Entry <Unit, Measurement> entry : entryList) {
+            Unit unit1 = entry.getKey();
+            Unit unit2 = entry.getValue().getUnit();
+            if (!unitMeasurementMap.containsKey(unit1)) unitMeasurementMap.put(unit1, new ArrayList<>());
+            if (!unitMeasurementMap.containsKey(unit2)) unitMeasurementMap.put(unit2, new ArrayList<>());
+            unitMeasurementMap.get(unit1).add(entry.getValue());
+            Measurement inverseMeasurement = new Measurement();
+            inverseMeasurement.setUnit(unit1);
+            inverseMeasurement.setQuantity(1.0 / entry.getValue().getQuantity());
+            unitMeasurementMap.get(unit2).add(inverseMeasurement);
+        }
+        return unitMeasurementMap;
     }
 
     @Override

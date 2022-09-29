@@ -15,23 +15,14 @@ import java.util.Map;
 
 public class RecipeIngredientJdbcTemplateRepository implements RecipeIngredientRepository {
     private final JdbcTemplate jdbcTemplate;
-    private Map <Integer, Ingredient> ingredients;
-    private final Map <Integer, Unit> units;
 
-    public RecipeIngredientJdbcTemplateRepository(JdbcTemplate jdbcTemplate, Map <Integer, Ingredient> ingredients,
-                                                  Map <Integer, Unit> units) {
+    public RecipeIngredientJdbcTemplateRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-        this.ingredients = ingredients;
-        this.units = units;
     }
 
     @Override
-    public void setIngredients(Map<Integer, Ingredient> ingredients) {
-        this.ingredients = ingredients;
-    }
-
-    @Override
-    public List <RecipeIngredient> findByRecipe(int recipeId) {
+    public List <RecipeIngredient> findByRecipe(Map <Integer, Ingredient> ingredients, Map <Integer, Unit> units,
+                                                int recipeId) {
         final String sql = "select " +
                     "ingredient_id, " +
                     "quantity, " +

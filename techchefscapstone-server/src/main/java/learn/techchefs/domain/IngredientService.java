@@ -2,7 +2,6 @@ package learn.techchefs.domain;
 
 import learn.techchefs.data.IngredientRepository;
 import learn.techchefs.models.Ingredient;
-import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.ArrayList;
 import java.util.List;

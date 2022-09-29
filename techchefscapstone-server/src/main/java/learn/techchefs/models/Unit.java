@@ -1,5 +1,7 @@
 package learn.techchefs.models;
 
+import java.util.Objects;
+
 public class Unit {
     private int id;
     private String name;
@@ -27,5 +29,18 @@ public class Unit {
 
     public void setAbbr(String abbr) {
         this.abbr = abbr;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Unit unit = (Unit) o;
+        return id == unit.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

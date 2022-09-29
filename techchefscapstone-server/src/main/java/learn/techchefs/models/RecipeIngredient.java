@@ -1,10 +1,14 @@
 package learn.techchefs.models;
 
+import java.util.List;
+import java.util.Map;
+
 public class RecipeIngredient {
     private Ingredient ingredient;
     private Measurement measurement;
     private boolean isOptional;
     private String preparation;
+    private Map <Unit, Double> altMeasurements;
 
     public Ingredient getIngredient() {
         return ingredient;
@@ -36,5 +40,13 @@ public class RecipeIngredient {
 
     public void setPreparation(String preparation) {
         this.preparation = preparation;
+    }
+
+    public Map<Unit, Double> getAltMeasurements() {
+        return altMeasurements;
+    }
+
+    public void setAltMeasurements(Map<Unit, Double> altMeasurements) {
+        this.altMeasurements = altMeasurements;
     }
 }
