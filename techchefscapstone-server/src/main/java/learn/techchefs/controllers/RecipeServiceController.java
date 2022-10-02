@@ -1,43 +1,43 @@
 package learn.techchefs.controllers;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/*
 @RestController
-@RequestMapping("/api/techchefs")
-public class DefaultController {
-    private final Service service;
+@RequestMapping("/api/techchefs/RecipeService")
+public class RecipeServiceController {
+    private final RecipeService service;
 
-    public DefaultController(Service service) {
+    public RecipeServiceController(RecipeService service) {
         this.service = service;
     }
 
     @GetMapping
-    public List<> findAll() throws DataAccessException {
+    public List<Recipe> findAll() throws DataAccessException {
         return service.findAll();
     }
 
-    @GetMapping("/---/{---}")
-    public List<> findBy(@PathVariable String ) throws DataAccessException {
-        return service.findBy();
+    @GetMapping("/{ingredient}")
+    public List<Recipe> findByIngredients(@PathVariable List<Ingredient> ingredients) throws DataAccessException {
+        return service.findByIngregients();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<---> findById(@PathVariable int id) throws DataAccessException {
-        --- --- = service.findById(id);
-        if (--- == null) {
+    public ResponseEntity<Recipe> findById(@PathVariable int id) throws DataAccessException {
+        Recipe recipe = service.findById(id);
+        if (recipe == null) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(---, HttpStatus.OK);
+        return new ResponseEntity<>(recipe, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody --- ---) throws DataAccessException {
-        Result result = service.create(---);
+    public ResponseEntity<?> add(@RequestBody Recipe recipe) throws DataAccessException {
+        RecipeResult result = service.create(recipe);
         if (!result.isSuccess()) {
             return new ResponseEntity<>(result.getErrorMessages(), HttpStatus.BAD_REQUEST); // 400
         }
@@ -45,12 +45,12 @@ public class DefaultController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable int id, @RequestBody --- ---) throws DataAccessException {
-        if (id != ---.getId()) {
+    public ResponseEntity<?> update(@PathVariable int id, @RequestBody Recipe recipe) throws DataAccessException {
+        if (id != recipe.getId()) {
             return new ResponseEntity<>(HttpStatus.CONFLICT); // 409
         }
 
-        Result result = service.update(---);
+        Result result = service.update(recipe);
         if (!result.isSuccess()) {
             if (result.getResultType() == ResultType.NOT_FOUND) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404
@@ -70,4 +70,3 @@ public class DefaultController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT); // 204
     }
 }
-*/
