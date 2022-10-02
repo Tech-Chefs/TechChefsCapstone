@@ -1,5 +1,11 @@
 package learn.techchefs.controllers;
 
+import learn.techchefs.domain.FilterType;
+import learn.techchefs.domain.IngredientService;
+import learn.techchefs.domain.Result;
+import learn.techchefs.domain.ResultType;
+import learn.techchefs.models.Ingredient;
+import learn.techchefs.models.Recipe;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,12 +31,12 @@ public class IngredientServiceController {
     public List<Ingredient> filter(@PathVariable FilterType containsDairy, FilterType nutBased, FilterType meat, FilterType fish,
                                    FilterType animalBased, FilterType containsGluten, FilterType kosher,
                                    FilterType containsEgg, FilterType containsSoy) throws DataAccessException {
-        return service.findByIngregients();
+        return service.filter(containsDairy, nutBased, meat, fish, animalBased, containsGluten, kosher, containsEgg, containsSoy);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Recipe> findById(@PathVariable int id) throws DataAccessException {
-        Recipe recipe = service.findById(id);
+        Recipe recipe = service.findSubstitutions(id);
         if (recipe == null) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
@@ -39,11 +45,11 @@ public class IngredientServiceController {
 
     @PostMapping
     public ResponseEntity<?> add(@RequestBody Ingredient ingredient) throws DataAccessException {
-        Result result = service.add(ingredient);
-        if (!result.isSuccess()) {
-            return new ResponseEntity<>(result.getErrorMessages(), HttpStatus.BAD_REQUEST); // 400
+        Result<Ingredient> result = service.add(ingredient);
+        if (result.getResultType() == ResultType.INVALID) {
+            return new ResponseEntity<>(result.getMessages(), HttpStatus.BAD_REQUEST); // 400
         }
-        return new ResponseEntity<>(result.get(), HttpStatus.CREATED); // 201
+        return new ResponseEntity<>(result.getMessages(), HttpStatus.CREATED); // 201
     }
 
     @PutMapping("/{id}")
@@ -52,12 +58,12 @@ public class IngredientServiceController {
             return new ResponseEntity<>(HttpStatus.CONFLICT); // 409
         }
 
-        Result result = service.update(ingredient);
-        if (!result.isSuccess()) {
+        Result<Ingredient> result = service.update(ingredient);
+        if (result.getResultType() == ResultType.INVALID) {
             if (result.getResultType() == ResultType.NOT_FOUND) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404
             } else {
-                return new ResponseEntity<>(result.getErrorMessages(), HttpStatus.BAD_REQUEST); // 400
+                return new ResponseEntity<>(result.getMessages(), HttpStatus.BAD_REQUEST); // 400
             }
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT); // 204
@@ -65,7 +71,7 @@ public class IngredientServiceController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable int id) throws DataAccessException {
-        Result result = service.deleteById(id);
+        Result<Ingredient> result = service.delete(id);
         if (result.getResultType() == ResultType.NOT_FOUND) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404
         }

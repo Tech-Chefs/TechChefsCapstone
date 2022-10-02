@@ -1,5 +1,10 @@
 package learn.techchefs.controllers;
 
+import learn.techchefs.domain.RecipeService;
+import learn.techchefs.domain.Result;
+import learn.techchefs.domain.ResultType;
+import learn.techchefs.models.Ingredient;
+import learn.techchefs.models.Recipe;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,12 +28,12 @@ public class RecipeServiceController {
 
     @GetMapping("/{ingredient}")
     public List<Recipe> findByIngredients(@PathVariable List<Ingredient> ingredients) throws DataAccessException {
-        return service.findByIngregients();
+        return service.findByIngredients(ingredients);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Recipe> findById(@PathVariable int id) throws DataAccessException {
-        Recipe recipe = service.findById(id);
+        Result<Recipe> recipe = service.findById(id);
         if (recipe == null) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
@@ -37,11 +42,11 @@ public class RecipeServiceController {
 
     @PostMapping
     public ResponseEntity<?> add(@RequestBody Recipe recipe) throws DataAccessException {
-        RecipeResult result = service.create(recipe);
-        if (!result.isSuccess()) {
-            return new ResponseEntity<>(result.getErrorMessages(), HttpStatus.BAD_REQUEST); // 400
+        Result result = service.add(recipe);
+        if (result.getResultType() == ResultType.INVALID) {
+            return new ResponseEntity<>(result.getMessages(), HttpStatus.BAD_REQUEST); // 400
         }
-        return new ResponseEntity<>(result.get(), HttpStatus.CREATED); // 201
+        return new ResponseEntity<>(result.getResultType(), HttpStatus.CREATED); // 201
     }
 
     @PutMapping("/{id}")
@@ -51,11 +56,11 @@ public class RecipeServiceController {
         }
 
         Result result = service.update(recipe);
-        if (!result.isSuccess()) {
+        if (result.getResultType() == ResultType.INVALID) {
             if (result.getResultType() == ResultType.NOT_FOUND) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404
             } else {
-                return new ResponseEntity<>(result.getErrorMessages(), HttpStatus.BAD_REQUEST); // 400
+                return new ResponseEntity<>(result.getMessages(), HttpStatus.BAD_REQUEST); // 400
             }
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT); // 204
@@ -63,7 +68,7 @@ public class RecipeServiceController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable int id) throws DataAccessException {
-        Result result = service.deleteById(id);
+        Result result = service.delete(id);
         if (result.getResultType() == ResultType.NOT_FOUND) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404
         }
