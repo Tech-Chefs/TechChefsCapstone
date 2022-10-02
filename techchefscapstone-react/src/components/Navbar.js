@@ -10,12 +10,13 @@ function Navbar() {
                 <form className="d-flex col-6
                 " role="search">
                     <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-                        <button className="btn btn-outline-success" type="submit">Search</button>
+                        <button className="btn btn-outline-success bi bi-search" type="submit"></button>
                 </form>
                 <ul className="navbar-nav col-3">
                     <li className='nav-item'><Link className="nav-link" to="/">Home</Link></li>
                     <li className='nav-item'><Link className="nav-link" to="/techchefs/add">Create</Link></li>
                     <li className='nav-item'><Link className="nav-link" to="/techchefs">Recipes List</Link></li>
+                    <li className='nav-item'><Link type="button" className="btn btn-primary btn-lg" to="/loginpage">Login</Link></li>
                 </ul>
             </div>
         </nav>
