@@ -1,10 +1,11 @@
 package learn.techchefs.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Result <T>{
-    private ResultType resultType;
-    private List <String> messages;
+    private ResultType resultType = ResultType.SUCCESS;
+    private List <String> messages = new ArrayList<>();
     private T payload;
 
     public T getPayload() {

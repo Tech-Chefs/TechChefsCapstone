@@ -2,12 +2,14 @@ package learn.techchefs.domain;
 
 import learn.techchefs.data.*;
 import learn.techchefs.models.*;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Service
 public class RecipeService {
     private final RecipeRepository repository;
     private final DirectionRepository directionRepository;
@@ -33,6 +35,8 @@ public class RecipeService {
         units = unitRepository.findAll().stream()
                 .collect(Collectors.toMap(Unit::getId, unit -> unit));
         unitComparisons = unitUnitRepository.findAll(units);
+
+        setIngredients();
     }
 
     public void setIngredients () {

@@ -2,11 +2,13 @@ package learn.techchefs.domain;
 
 import learn.techchefs.data.IngredientRepository;
 import learn.techchefs.models.Ingredient;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class IngredientService {
     private final IngredientRepository repository;
 
@@ -45,7 +47,7 @@ public class IngredientService {
 
     public List <Ingredient> findSubstitutions (List <Ingredient> recommended) {
         List <Ingredient> substitutions = new ArrayList<>();
-        while (!recommended.isEmpty()) {
+        while (recommended.get(0) != null) {
             Ingredient front = recommended.get(0);
             recommended.add(repository.findById(front.getParentId()));
             recommended.addAll(repository.findByCategory(front.getId()));
@@ -66,8 +68,13 @@ public class IngredientService {
     public Result <Ingredient> update (Ingredient ingredient) {
         Result <Ingredient> result = new Result<>();
         result.setPayload(ingredient);
-        if (! repository.update(ingredient)) result.addMessage(String.format("Ingredient with id %d not found",
-                ingredient.getId()), ResultType.NOT_FOUND);
+        if (repository.findById(ingredient.getId()) == null) {
+            result.addMessage(String.format("Ingredient with id %d not found", ingredient.getId()),
+                    ResultType.NOT_FOUND);
+            return result;
+        }
+        if (! repository.update(ingredient)) result.addMessage(String.format("Ingredient with id %d cannot be updated",
+                ingredient.getId()), ResultType.INVALID);
         return result;
     }
 
