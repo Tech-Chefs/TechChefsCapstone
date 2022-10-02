@@ -1,0 +1,137 @@
+/* HOME PAGE CSS */
+
+.navbar-nav {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.nav-link {
+  color: black;
+  font-size: 24px;
+}
+
+.nav-link:hover {
+  text-shadow: 0 0 3px black;
+  transition:.5s;
+  transform:translate(5px);
+  color:#314295
+}
+
+.homebody {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 275px;
+}
+
+h1 {
+  font-family: 'Libre Baskerville', serif;
+  padding: 20px;
+  font-size: 64px;
+}
+
+
+/* LOGIN PAGE CSS */
+
+.loginBody {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 200px;
+}
+
+.loginButton {
+  text-align: center;
+}
+
+/* PROFILE CSS */
+
+.profilePicture {
+  background-color: #314295;
+  height: 200px;
+ 
+}
+
+.bio {
+  background-color: blueviolet;
+  height: 200px;
+}
+
+.settingsGutter {
+  background-color: aqua;
+
+  height: 750px;
+}
+
+
+.viewport {
+  background-color: brown;
+  height: 750px;
+}
+
+.row {
+  margin: 20px 0px;
+}
+
+.profile {
+  text-align: center;
+  align-items: center ;
+}
+
+/* RECIPE CSS */
+#recipeCarousel {
+  background-color: aqua;
+  height: 300px;
+}
+
+#items {
+  background-color: aquamarine;
+  height: 400px;
+}
+
+#instructions {
+  background-color: blue;
+  height: 400px;
+}
+
+
+/* CREATE A RECIPE CSS */
+#recipeName {
+  background-color: #314295;
+  height: 60px;
+}
+
+#desc {
+  background-color: chartreuse;
+  height: 300px;
+}
+
+#ingre {
+  background-color: cornflowerblue;
+  height: 300px;
+  display: flex;
+}
+
+.IngreButton {
+  align-self: flex-end;
+  margin: 10px;
+  justify-content: flex-end;
+}
+
+#direc {
+  background-color: darkblue;
+  height: 300px;
+}
+
+/* CREATE A RECIPE CSS */
+
+#ingreName {
+  background-color: #314295;
+  height: 60px;
+}
+
+#diet {
+  background-color: chartreuse;
+  height: 500px;
+}
