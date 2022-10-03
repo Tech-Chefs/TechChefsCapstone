@@ -5,6 +5,7 @@ import learn.techchefs.models.Measurement;
 import learn.techchefs.models.Unit;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
@@ -13,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Repository
 public class UnitUnitJdbcTemplateRepository implements UnitUnitRepository {
     private final JdbcTemplate jdbcTemplate;
 
@@ -23,8 +25,8 @@ public class UnitUnitJdbcTemplateRepository implements UnitUnitRepository {
     @Override
     public Map <Unit, List <Measurement>> findAll(Map <Integer, Unit> units) {
         final String sql = "select " +
-                    "unit_id_1, " +
-                    "unit_id_2, " +
+                    "unit_1_id, " +
+                    "unit_2_id, " +
                     "factor " +
                 "from unit_unit";
         Map <Unit, List <Measurement>> unitMeasurementMap = new HashMap<>();

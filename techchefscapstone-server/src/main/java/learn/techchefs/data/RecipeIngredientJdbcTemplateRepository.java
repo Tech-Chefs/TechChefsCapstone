@@ -7,12 +7,14 @@ import learn.techchefs.models.RecipeIngredient;
 import learn.techchefs.models.Unit;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
 import java.util.Map;
 
+@Repository
 public class RecipeIngredientJdbcTemplateRepository implements RecipeIngredientRepository {
     private final JdbcTemplate jdbcTemplate;
 
