@@ -11,6 +11,7 @@ public class RecipeMapper implements RowMapper <Recipe> {
     public Recipe mapRow(ResultSet rs, int rowNum) throws SQLException {
         Recipe recipe = new Recipe();
         recipe.setId(rs.getInt("id"));
+        recipe.setUserId(rs.getInt("user_id"));
         recipe.setName(rs.getString("name"));
         recipe.setDescription(rs.getString("description"));
         return recipe;

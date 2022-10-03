@@ -25,6 +25,7 @@ public class IngredientJdbcTemplateRepository implements IngredientRepository {
         final String sql = "select " +
                     "id, " +
                     "name, " +
+                    "user_id, " +
                     "parent_id, " +
                     "contains_dairy, " +
                     "nut_based, " +
@@ -52,6 +53,7 @@ public class IngredientJdbcTemplateRepository implements IngredientRepository {
         final String sql = "select " +
                     "id, " +
                     "name, " +
+                    "user_id, " +
                     "parent_id, " +
                     "contains_dairy, " +
                     "nut_based, " +
@@ -73,6 +75,7 @@ public class IngredientJdbcTemplateRepository implements IngredientRepository {
         final String sql = "select " +
                     "id, " +
                     "name, " +
+                    "user_id, " +
                     "parent_id, " +
                     "contains_dairy, " +
                     "nut_based, " +
@@ -92,38 +95,39 @@ public class IngredientJdbcTemplateRepository implements IngredientRepository {
 
     @Override
     public Ingredient add(Ingredient ingredient) {
-        final String sql = "insert into ingredient (name, contains_dairy, nut_based, meat, fish, animal_based, " +
+        final String sql = "insert into ingredient (name, user_id, contains_dairy, nut_based, meat, fish, animal_based, " +
                 "contains_gluten, kosher, contains_egg, contains_soy) values " +
                 "(?,?,?,?,?,?,?,?,?,?)";
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, ingredient.getName());
-            statement.setBoolean(2,ingredient.isContainsDairy());
-            statement.setBoolean(3,ingredient.isNutBased());
+            statement.setInt(2, ingredient.getUserId());
+            statement.setBoolean(3,ingredient.isContainsDairy());
+            statement.setBoolean(4,ingredient.isNutBased());
             if(ingredient.getAnimalBased()) {
-                statement.setBoolean(6, true);
-                if (ingredient.isMeat()) {
-                    statement.setBoolean(4, true);
-                    statement.setBoolean(5, ingredient.isFish());
-                }
-                statement.setBoolean(9, ingredient.isContainsEgg());
-            }
-            else {
-                statement.setBoolean(6, false);
-                statement.setBoolean(4, false);
-                statement.setBoolean(5, false);
-                statement.setBoolean(9, false);
-            }
-            if (ingredient.getContainsGluten()) {
                 statement.setBoolean(7, true);
-                statement.setBoolean(10, ingredient.isContainsSoy());
+                if (ingredient.isMeat()) {
+                    statement.setBoolean(5, true);
+                    statement.setBoolean(6, ingredient.isFish());
+                }
+                statement.setBoolean(10, ingredient.isContainsEgg());
             }
             else {
                 statement.setBoolean(7, false);
+                statement.setBoolean(5, false);
+                statement.setBoolean(6, false);
                 statement.setBoolean(10, false);
             }
-            statement.setBoolean(8, ingredient.isKosher());
+            if (ingredient.isContainsGluten()) {
+                statement.setBoolean(8, true);
+                statement.setBoolean(11, ingredient.isContainsSoy());
+            }
+            else {
+                statement.setBoolean(8, false);
+                statement.setBoolean(11, false);
+            }
+            statement.setBoolean(9, ingredient.isKosher());
             return statement;
         }, keyHolder);
 
@@ -156,7 +160,7 @@ public class IngredientJdbcTemplateRepository implements IngredientRepository {
                 ingredient.isMeat(),
                 ingredient.isFish(),
                 ingredient.getAnimalBased(),
-                ingredient.getContainsGluten(),
+                ingredient.isContainsGluten(),
                 ingredient.isKosher(),
                 ingredient.isContainsEgg(),
                 ingredient.isContainsSoy(),
