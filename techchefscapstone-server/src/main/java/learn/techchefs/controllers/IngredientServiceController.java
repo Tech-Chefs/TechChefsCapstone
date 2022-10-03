@@ -27,20 +27,20 @@ public class IngredientServiceController {
         return service.findAll();
     }
 
-    @GetMapping("/{ingredientFilter}")
+    @GetMapping("/filter/{ingredientFilter}")
     public List<Ingredient> filter(@PathVariable FilterType containsDairy, FilterType nutBased, FilterType meat, FilterType fish,
                                    FilterType animalBased, FilterType containsGluten, FilterType kosher,
                                    FilterType containsEgg, FilterType containsSoy) throws DataAccessException {
         return service.filter(containsDairy, nutBased, meat, fish, animalBased, containsGluten, kosher, containsEgg, containsSoy);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Recipe> findById(@PathVariable int id) throws DataAccessException {
-        Recipe recipe = service.findSubstitutions(id);
-        if (recipe == null) {
+    @GetMapping("/substitute/{Ingredient}")
+    public ResponseEntity<List<Ingredient>> findSubstitutions(@PathVariable List<Ingredient> ingredients) throws DataAccessException {
+        List<Ingredient> ingredientList = service.findSubstitutions(ingredients);
+        if (ingredientList == null) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(recipe, HttpStatus.OK);
+        return new ResponseEntity<>(ingredientList, HttpStatus.OK);
     }
 
     @PostMapping

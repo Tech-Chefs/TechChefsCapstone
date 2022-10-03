@@ -32,7 +32,7 @@ public class RecipeServiceController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Recipe> findById(@PathVariable int id) throws DataAccessException {
+    public ResponseEntity<?> findById(@PathVariable int id) throws DataAccessException {
         Result<Recipe> recipe = service.findById(id);
         if (recipe == null) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
@@ -42,7 +42,7 @@ public class RecipeServiceController {
 
     @PostMapping
     public ResponseEntity<?> add(@RequestBody Recipe recipe) throws DataAccessException {
-        Result result = service.add(recipe);
+        Result<Recipe> result = service.add(recipe);
         if (result.getResultType() == ResultType.INVALID) {
             return new ResponseEntity<>(result.getMessages(), HttpStatus.BAD_REQUEST); // 400
         }
@@ -55,7 +55,7 @@ public class RecipeServiceController {
             return new ResponseEntity<>(HttpStatus.CONFLICT); // 409
         }
 
-        Result result = service.update(recipe);
+        Result<Recipe> result = service.update(recipe);
         if (result.getResultType() == ResultType.INVALID) {
             if (result.getResultType() == ResultType.NOT_FOUND) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404
@@ -68,7 +68,7 @@ public class RecipeServiceController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable int id) throws DataAccessException {
-        Result result = service.delete(id);
+        Result<Recipe> result = service.delete(id);
         if (result.getResultType() == ResultType.NOT_FOUND) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404
         }
