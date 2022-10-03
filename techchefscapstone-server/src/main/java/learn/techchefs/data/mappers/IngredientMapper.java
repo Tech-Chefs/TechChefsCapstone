@@ -12,6 +12,7 @@ public class IngredientMapper implements RowMapper <Ingredient> {
         Ingredient ingredient = new Ingredient();
         ingredient.setId(rs.getInt("id"));
         ingredient.setName(rs.getString("name"));
+        ingredient.setUserId(rs.getInt("user_id"));
         ingredient.setParentId(rs.getInt("parent_id"));
         ingredient.setContainsDairy(rs.getBoolean("contains_dairy"));
         ingredient.setNutBased(rs.getBoolean("nut_based"));

@@ -22,6 +22,7 @@ public class RecipeJdbcTemplateRepository implements RecipeRepository {
     public List <Recipe> findAll() {
         final String sql = "select " +
                     "id, " +
+                    "user_id, " +
                     "name, " +
                     "description " +
                 "from recipe";
@@ -32,6 +33,7 @@ public class RecipeJdbcTemplateRepository implements RecipeRepository {
     public Recipe findById(int id) {
         final String sql = "select " +
                     "id, " +
+                    "user_id, " +
                     "name, " +
                     "description " +
                 "from recipe " +
@@ -42,13 +44,14 @@ public class RecipeJdbcTemplateRepository implements RecipeRepository {
 
     @Override
     public Recipe add(Recipe recipe) {
-        final String sql = "insert into recipe (name, description) values " +
-                "(?, ?)";
+        final String sql = "insert into recipe (user_id, name, description) values " +
+                "(?, ?, ?)";
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, recipe.getName());
-            ps.setString(2, recipe.getDescription());
+            ps.setInt(1, recipe.getUserId());
+            ps.setString(2, recipe.getName());
+            ps.setString(3, recipe.getDescription());
             return ps;
         }, keyHolder);
         if (rowsAffected == 0) return null;

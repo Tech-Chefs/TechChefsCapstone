@@ -6,6 +6,7 @@ import java.util.Objects;
 
 public class Ingredient {
     private int id;
+    private int userId;
     private String name;
     private int parentId;
     private List <Ingredient> subIngredients;
@@ -21,6 +22,18 @@ public class Ingredient {
 
     public Ingredient () {
         subIngredients = new ArrayList<>();
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public boolean isContainsGluten() {
+        return containsGluten;
     }
 
     public int getParentId() {
@@ -57,10 +70,6 @@ public class Ingredient {
 
     public void setContainsEgg(boolean containsEgg) {
         this.containsEgg = containsEgg;
-    }
-
-    public boolean getContainsGluten() {
-        return containsGluten;
     }
 
     public void setContainsGluten(boolean containsGluten) {
