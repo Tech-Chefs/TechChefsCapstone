@@ -1,5 +1,13 @@
 @base_url = http://localhost:8080/api/techchefs
 
+POST http://localhost:8080/api/authenticate HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "user",
+  "password": "root"
+}
+
 ### List All Recipes
 
 GET {{base_url}}/RecipeService HTTP/1.1
