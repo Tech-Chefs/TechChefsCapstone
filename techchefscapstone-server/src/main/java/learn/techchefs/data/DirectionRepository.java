@@ -1,15 +1,13 @@
 package learn.techchefs.data;
 
-import learn.techchefs.models.Direction;
-
 import java.util.List;
 
 public interface DirectionRepository {
-    List<Direction> findByRecipe(int recipeId);
+    List<String> findByRecipe(int recipeId);
 
-    void addByRecipe(int recipeId, List<Direction> directions);
+    void addByRecipe(int recipeId, List<String> directions);
 
     boolean deleteByRecipe(int recipeId);
 
-    boolean updateByRecipe(int recipeId, List<Direction> directions);
+    boolean updateByRecipe(int recipeId, List<String> directions);
 }

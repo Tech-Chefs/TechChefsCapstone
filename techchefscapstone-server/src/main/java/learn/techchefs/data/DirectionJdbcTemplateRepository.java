@@ -19,20 +19,17 @@ public class DirectionJdbcTemplateRepository implements DirectionRepository {
     }
 
     @Override
-    public List <Direction> findByRecipe(int recipeId) {
-        final String sql = "select " +
-                    "instruction, " +
-                    "num_minutes " +
-                "from step " +
+    public List <String> findByRecipe(int recipeId) {
+        final String sql = "select instruction from recipe_direction" +
                 "where recipe_id = ? " +
                 "order by step_num";
         return jdbcTemplate.query(sql, new DirectionMapper());
     }
 
     @Override
-    public void addByRecipe(int recipeId, List<Direction> directions) {
-        final String sql = "insert into step (recipe_id, step_num, instruction, num_minutes) values " +
-                "(?, ?, ?, ?)";
+    public void addByRecipe(int recipeId, List<String> directions) {
+        final String sql = "insert into recipe_direction (recipe_id, step_num, instruction) values " +
+                "(?, ?, ?)";
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         for (int i = 0; i < directions.size(); i++) {
             int finalI = i;
@@ -40,8 +37,7 @@ public class DirectionJdbcTemplateRepository implements DirectionRepository {
                 PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 statement.setInt(1, recipeId);
                 statement.setInt(2, (finalI + 1));
-                statement.setString(3, directions.get(finalI).getInstruction());
-                statement.setInt(4, directions.get(finalI).getDurationMinutes());
+                statement.setString(3, directions.get(finalI));
                 return statement;
             },keyHolder);
         }
@@ -49,12 +45,12 @@ public class DirectionJdbcTemplateRepository implements DirectionRepository {
 
     @Override
     public boolean deleteByRecipe(int recipeId) {
-        final String sql = "delete from step where recipe_id = ?";
+        final String sql = "delete from recipe_direction where recipe_id = ?";
         return jdbcTemplate.update(sql,recipeId) > 0;
     }
 
     @Override
-    public boolean updateByRecipe(int recipeId, List<Direction> directions) {
+    public boolean updateByRecipe(int recipeId, List<String> directions) {
         if (!deleteByRecipe(recipeId)) return false;
         addByRecipe(recipeId, directions);
         return true;

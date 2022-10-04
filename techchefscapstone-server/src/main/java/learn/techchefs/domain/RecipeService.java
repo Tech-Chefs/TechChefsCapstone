@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 public class RecipeService {
     private final RecipeRepository repository;
     private final DirectionRepository directionRepository;
-    private final UnitRepository unitRepository;
     private final UnitUnitRepository unitUnitRepository;
     private final RecipeIngredientRepository recipeIngredientRepository;
     private final IngredientRepository ingredientRepository;
@@ -27,7 +26,6 @@ public class RecipeService {
                          IngredientRepository ingredientRepository) {
         this.repository = repository;
         this.directionRepository = directionRepository;
-        this.unitRepository = unitRepository;
         this.unitUnitRepository = unitUnitRepository;
         this.recipeIngredientRepository = recipeIngredientRepository;
         this.ingredientRepository = ingredientRepository;
@@ -93,8 +91,8 @@ public class RecipeService {
         return result;
     }
 
-    public Result <List <Direction>> updateDirections (int recipeId, List <Direction> directions) {
-        Result <List <Direction>> result = new Result<>();
+    public Result <List <String>> updateDirections (int recipeId, List <String> directions) {
+        Result <List <String>> result = new Result<>();
         result.setPayload(directions);
         if (! directionRepository.updateByRecipe(recipeId, directions))
             result.addMessage(String.format("Directions for recipe #%d cannot be updated"), ResultType.INVALID);
