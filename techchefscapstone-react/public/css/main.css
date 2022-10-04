@@ -81,20 +81,24 @@ h1 {
 
 /* RECIPE CSS */
 #recipeCarousel {
-  background-color: aqua;
+  border: solid;
   height: 300px;
 }
 
 #items {
-  background-color: aquamarine;
+  border: solid;
   height: 400px;
 }
 
 #instructions {
-  background-color: blue;
+  border: solid;
   height: 400px;
 }
 
+.header {
+  text-align: center;
+  font-family: 'Libre Baskerville', serif
+}
 
 /* CREATE A RECIPE CSS */
 #recipeName {
@@ -116,7 +120,6 @@ h1 {
 .IngreButton {
   align-self: flex-end;
   margin: 10px;
-  justify-content: flex-end;
 }
 
 #direc {
@@ -124,7 +127,7 @@ h1 {
   height: 300px;
 }
 
-/* CREATE A RECIPE CSS */
+/* CREATE A INGREDIENT CSS */
 
 #ingreName {
   background-color: #314295;
@@ -134,4 +137,13 @@ h1 {
 #diet {
   background-color: chartreuse;
   height: 500px;
+}
+
+/* RECIPE LIST CSS */
+.heroSection {
+  text-align: center;
+}
+
+.card {
+  width: 30rem;
 }

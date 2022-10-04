@@ -26,6 +26,7 @@ function App() {
           </Route>
 
           <Route path="/techchefs" exact>
+            <RecipeList />
           </Route>
 
           <Route path="/loginpage" exact>
@@ -40,16 +41,12 @@ function App() {
             <GroceryList />
           </Route>
 
-          <Route path="/recipelist" exact>
-            <RecipeList />
-          </Route>
-
-          <Route path="/recipe" exact>
+          <Route path={"/recipe/:id"} exact>
             <Recipe />
           </Route>
 
           <Route path="/ingredient">
-            <Ingredient/>
+            <Ingredient />
           </Route>
 
           <Route>
