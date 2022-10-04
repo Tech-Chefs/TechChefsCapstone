@@ -35,7 +35,7 @@ public class IngredientService {
                 .filter(ingredient -> (animalBased == FilterType.IGNORE ||
                         ((animalBased == FilterType.SHOW_WITH) == (ingredient.isAnimalBased()))))
                 .filter(ingredient -> (containsGluten == FilterType.IGNORE ||
-                        ((containsGluten == FilterType.SHOW_WITH) == (ingredient.getContainsGluten()))))
+                        ((containsGluten == FilterType.SHOW_WITH) == (ingredient.isContainsGluten()))))
                 .filter(ingredient -> (kosher == FilterType.IGNORE ||
                         ((kosher == FilterType.SHOW_WITH) == (ingredient.isKosher()))))
                 .filter(ingredient -> (containsEgg == FilterType.IGNORE ||
