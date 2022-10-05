@@ -12,7 +12,6 @@ public class Ingredient {
     private List <Ingredient> subIngredients;
     private boolean containsDairy;
     private boolean nutBased;
-    private boolean isKosher;
     private boolean containsEgg;
     private boolean  containsGluten;
     private boolean containsSoy;
@@ -54,14 +53,6 @@ public class Ingredient {
 
     public void setSubIngredients (List <Ingredient> ingredients) {
         subIngredients = ingredients;
-    }
-
-    public boolean isKosher() {
-        return isKosher;
-    }
-
-    public void setKosher(boolean kosher) {
-        isKosher = kosher;
     }
 
     public boolean isContainsEgg() {
@@ -153,7 +144,6 @@ public class Ingredient {
                 ", subIngredients=" + subIngredients +
                 ", containsDairy=" + containsDairy +
                 ", nutBased=" + nutBased +
-                ", isKosher=" + isKosher +
                 ", containsEgg=" + containsEgg +
                 ", containsGluten=" + containsGluten +
                 ", containsSoy=" + containsSoy +
@@ -168,11 +158,11 @@ public class Ingredient {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ingredient that = (Ingredient) o;
-        return id == that.id && parentId == that.parentId && containsDairy == that.containsDairy && nutBased == that.nutBased && isKosher == that.isKosher && containsEgg == that.containsEgg && containsGluten == that.containsGluten && containsSoy == that.containsSoy && animalBased == that.animalBased && isMeat == that.isMeat && isFish == that.isFish && name.equals(that.name) && Objects.equals(subIngredients, that.subIngredients);
+        return id == that.id && parentId == that.parentId && containsDairy == that.containsDairy && nutBased == that.nutBased && containsEgg == that.containsEgg && containsGluten == that.containsGluten && containsSoy == that.containsSoy && animalBased == that.animalBased && isMeat == that.isMeat && isFish == that.isFish && name.equals(that.name) && Objects.equals(subIngredients, that.subIngredients);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, parentId, subIngredients, containsDairy, nutBased, isKosher, containsEgg, containsGluten, containsSoy, animalBased, isMeat, isFish);
+        return Objects.hash(id, name, parentId, subIngredients, containsDairy, nutBased, containsEgg, containsGluten, containsSoy, animalBased, isMeat, isFish);
     }
 }

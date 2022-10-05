@@ -21,7 +21,7 @@ public class IngredientService {
     }
 
     public List <Ingredient> filter (FilterType containsDairy, FilterType nutBased, FilterType meat, FilterType fish,
-                                     FilterType animalBased, FilterType containsGluten, FilterType kosher,
+                                     FilterType animalBased, FilterType containsGluten,
                                      FilterType containsEgg, FilterType containsSoy) {
         return repository.findAll().stream()
                 .filter(ingredient -> (containsDairy == FilterType.IGNORE ||
@@ -36,8 +36,6 @@ public class IngredientService {
                         ((animalBased == FilterType.SHOW_WITH) == (ingredient.isAnimalBased()))))
                 .filter(ingredient -> (containsGluten == FilterType.IGNORE ||
                         ((containsGluten == FilterType.SHOW_WITH) == (ingredient.isContainsGluten()))))
-                .filter(ingredient -> (kosher == FilterType.IGNORE ||
-                        ((kosher == FilterType.SHOW_WITH) == (ingredient.isKosher()))))
                 .filter(ingredient -> (containsEgg == FilterType.IGNORE ||
                         ((containsEgg == FilterType.SHOW_WITH) == (ingredient.isContainsEgg()))))
                 .filter(ingredient -> (containsSoy == FilterType.IGNORE ||

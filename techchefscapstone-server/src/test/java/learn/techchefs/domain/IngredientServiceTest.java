@@ -96,7 +96,7 @@ class IngredientServiceTest {
     void shouldFilterShowOnlyDairy() {
         when(repository.findAll()).thenReturn(ingredients);
         List <Ingredient> actual = service.filter(FilterType.SHOW_WITH, FilterType.IGNORE, FilterType.IGNORE,
-                FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE,
+                FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE,
                 FilterType.IGNORE);
         assertEquals(1, actual.size());
         List <Ingredient> expected = new ArrayList<>();
@@ -108,7 +108,7 @@ class IngredientServiceTest {
     void shouldFilterShowWithoutDairy() {
         when(repository.findAll()).thenReturn(ingredients);
         List <Ingredient> actual = service.filter(FilterType.SHOW_WITHOUT, FilterType.IGNORE, FilterType.IGNORE,
-                FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE,
+                FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE,
                 FilterType.IGNORE);
         assertEquals(8, actual.size());
         Ingredient unexpected = ingredients.get(1);
@@ -119,7 +119,7 @@ class IngredientServiceTest {
     void shouldFilterShowOnlyNuts() {
         when(repository.findAll()).thenReturn(ingredients);
         List <Ingredient> actual = service.filter(FilterType.IGNORE, FilterType.SHOW_WITH, FilterType.IGNORE,
-                FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE,
+                FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE,
                 FilterType.IGNORE);
         assertEquals(1, actual.size());
         List <Ingredient> expected = new ArrayList<>();
@@ -131,7 +131,7 @@ class IngredientServiceTest {
     void shouldFilterShowWithoutNuts() {
         when(repository.findAll()).thenReturn(ingredients);
         List <Ingredient> actual = service.filter(FilterType.IGNORE, FilterType.SHOW_WITHOUT, FilterType.IGNORE,
-                FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE,
+                FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE,
                 FilterType.IGNORE);
         assertEquals(8, actual.size());
         Ingredient unexpected = ingredients.get(2);
@@ -142,7 +142,7 @@ class IngredientServiceTest {
     void shouldFilterShowOnlyMeat() {
         when(repository.findAll()).thenReturn(ingredients);
         List <Ingredient> actual = service.filter(FilterType.IGNORE, FilterType.IGNORE, FilterType.SHOW_WITH,
-                FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE,
+                FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE,
                 FilterType.IGNORE);
         assertEquals(2, actual.size());
         List <Ingredient> expected = new ArrayList<>();
@@ -155,7 +155,7 @@ class IngredientServiceTest {
     void shouldFilterShowWithoutMeat() {
         when(repository.findAll()).thenReturn(ingredients);
         List <Ingredient> actual = service.filter(FilterType.IGNORE, FilterType.IGNORE, FilterType.SHOW_WITHOUT,
-                FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE,
+                FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE,
                 FilterType.IGNORE);
         assertEquals(7, actual.size());
         assertFalse(actual.contains(ingredients.get(3)));
@@ -166,7 +166,7 @@ class IngredientServiceTest {
     void shouldFilterShowOnlyFish() {
         when(repository.findAll()).thenReturn(ingredients);
         List <Ingredient> actual = service.filter(FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE,
-                FilterType.SHOW_WITH, FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE,
+                FilterType.SHOW_WITH, FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE,
                 FilterType.IGNORE);
         assertEquals(1, actual.size());
         List <Ingredient> expected = new ArrayList<>();
@@ -178,7 +178,7 @@ class IngredientServiceTest {
     void shouldFilterShowWithoutFish() {
         when(repository.findAll()).thenReturn(ingredients);
         List <Ingredient> actual = service.filter(FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE,
-                FilterType.SHOW_WITHOUT, FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE,
+                FilterType.SHOW_WITHOUT, FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE,
                 FilterType.IGNORE);
         assertEquals(8, actual.size());
         assertFalse(actual.contains(ingredients.get(4)));
@@ -188,7 +188,7 @@ class IngredientServiceTest {
     void shouldFilterShowOnlyAnimalBased() {
         when(repository.findAll()).thenReturn(ingredients);
         List <Ingredient> actual = service.filter(FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE,
-                FilterType.IGNORE, FilterType.SHOW_WITH, FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE,
+                FilterType.IGNORE, FilterType.SHOW_WITH, FilterType.IGNORE, FilterType.IGNORE,
                 FilterType.IGNORE);
         assertEquals(4, actual.size());
         List <Ingredient> expected = new ArrayList<>();
@@ -203,7 +203,7 @@ class IngredientServiceTest {
     void shouldFilterShowWithoutAnimalBased() {
         when(repository.findAll()).thenReturn(ingredients);
         List <Ingredient> actual = service.filter(FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE,
-                FilterType.IGNORE, FilterType.SHOW_WITHOUT, FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE,
+                FilterType.IGNORE, FilterType.SHOW_WITHOUT, FilterType.IGNORE, FilterType.IGNORE,
                 FilterType.IGNORE);
         assertEquals(5, actual.size());
         List <Ingredient> expected = new ArrayList<>();
@@ -219,7 +219,7 @@ class IngredientServiceTest {
     void shouldFilterShowOnlyGluten() {
         when(repository.findAll()).thenReturn(ingredients);
         List <Ingredient> actual = service.filter(FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE,
-                FilterType.IGNORE, FilterType.IGNORE, FilterType.SHOW_WITH, FilterType.IGNORE, FilterType.IGNORE,
+                FilterType.IGNORE, FilterType.IGNORE, FilterType.SHOW_WITH, FilterType.IGNORE,
                 FilterType.IGNORE);
         assertEquals(2, actual.size());
         List <Ingredient> expected = new ArrayList<>();
@@ -232,7 +232,7 @@ class IngredientServiceTest {
     void shouldFilterShowWithoutGluten() {
         when(repository.findAll()).thenReturn(ingredients);
         List <Ingredient> actual = service.filter(FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE,
-                FilterType.IGNORE, FilterType.IGNORE, FilterType.SHOW_WITHOUT, FilterType.IGNORE, FilterType.IGNORE,
+                FilterType.IGNORE, FilterType.IGNORE, FilterType.SHOW_WITHOUT, FilterType.IGNORE,
                 FilterType.IGNORE);
         assertEquals(7, actual.size());
         List <Ingredient> unexpected = new ArrayList<>();
@@ -245,7 +245,7 @@ class IngredientServiceTest {
     void shouldFilterShowOnlyEgg() {
         when(repository.findAll()).thenReturn(ingredients);
         List <Ingredient> actual = service.filter(FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE,
-                FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE, FilterType.SHOW_WITH,
+                FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE, FilterType.SHOW_WITH,
                 FilterType.IGNORE);
         assertEquals(1, actual.size());
         List <Ingredient> expected = new ArrayList<>();
@@ -257,7 +257,7 @@ class IngredientServiceTest {
     void shouldFilterShowWithoutEgg() {
         when(repository.findAll()).thenReturn(ingredients);
         List <Ingredient> actual = service.filter(FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE,
-                FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE, FilterType.SHOW_WITHOUT,
+                FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE, FilterType.SHOW_WITHOUT,
                 FilterType.IGNORE);
         assertEquals(8, actual.size());
         assertFalse(actual.contains(ingredients.get(6)));
@@ -267,7 +267,7 @@ class IngredientServiceTest {
     void shouldFilterShowOnlySoy() {
         when(repository.findAll()).thenReturn(ingredients);
         List <Ingredient> actual = service.filter(FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE,
-                FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE,
+                FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE,
                 FilterType.SHOW_WITH);
         assertEquals(1, actual.size());
         List <Ingredient> expected = new ArrayList<>();
@@ -279,7 +279,7 @@ class IngredientServiceTest {
     void shouldFilterShowWithoutSoy() {
         when(repository.findAll()).thenReturn(ingredients);
         List <Ingredient> actual = service.filter(FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE,
-                FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE,
+                FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE, FilterType.IGNORE,
                 FilterType.SHOW_WITHOUT);
         assertEquals(8, actual.size());
         assertFalse(actual.contains(ingredients.get(7)));

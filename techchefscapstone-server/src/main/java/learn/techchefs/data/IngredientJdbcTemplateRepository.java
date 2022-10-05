@@ -94,7 +94,7 @@ public class IngredientJdbcTemplateRepository implements IngredientRepository {
     public Ingredient add(Ingredient ingredient) {
         final String sql = "insert into ingredient (name, user_id, contains_dairy, nut_based, meat, fish, animal_based, " +
                 "contains_gluten, contains_egg, contains_soy) values " +
-                "(?,?,?,?,?,?,?,?,?)";
+                "(?,?,?,?,?,?,?,?,?,?)";
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);

@@ -31,7 +31,7 @@ public class IngredientServiceController {
     public List<Ingredient> filter(@PathVariable FilterType containsDairy, FilterType nutBased, FilterType meat, FilterType fish,
                                    FilterType animalBased, FilterType containsGluten, FilterType kosher,
                                    FilterType containsEgg, FilterType containsSoy) throws DataAccessException {
-        return service.filter(containsDairy, nutBased, meat, fish, animalBased, containsGluten, kosher, containsEgg, containsSoy);
+        return service.filter(containsDairy, nutBased, meat, fish, animalBased, containsGluten, containsEgg, containsSoy);
     }
 
     @GetMapping("/substitute/{Ingredient}")
