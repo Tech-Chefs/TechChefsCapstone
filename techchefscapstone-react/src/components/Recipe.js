@@ -6,12 +6,8 @@ const RECIPE_DATA = [
         name: "PB&J Sandwich",
         description: "Peanut butter and fruit preserves—jelly—spread on bread.",
         directions: [
-            {
-                direction: {
-                    instruction: "Spread peanut butter onto 1 slice of bread. Spread 1 tablespoon jelly onto another slice of bread. Place on top of peanut butter, jelly-side down. Spread 1 teaspoon butter onto outside of each slice of bread.",
-                    durationMinutes: 5
-                }
-            }
+            "Spread peanut butter onto 1 slice of bread.", "Spread 1 tablespoon jelly onto another slice of bread.",
+            "Place on top of peanut butter, jelly-side down.", "Spread 1 teaspoon butter onto outside of each slice of bread.",
         ],
         recipeIngredients: [
             {
@@ -123,16 +119,23 @@ function Recipe() {
         return recipes.map(recipe => {
             let name = recipe.name;
             let description = recipe.description;
-            let directions = recipe.directions.map(dir => <li>{dir.direction.instruction} (Duration: {dir.direction.durationMinutes}mins.)</li>)
+            console.log(recipe.directions)
+
+            let directions = recipe.directions.map(dir => {
+                return (
+                    <li>{dir}</li>
+                )
+            })
+
             let ingredients = recipe.recipeIngredients.map(rec => {
                 return (
                     <>
-                        <li className="list-group-item">
-                            {rec.quantity}{rec.measurement.unit.abbreviation} {rec.ingredient.name} (Optional: {rec.isOptional ? "Yes" : "No"})
-                            <small>{rec.ingredient.containsDairy ? "🥛" : ""} {rec.ingredient.containsGluten ? "🌾" : ""} {rec.ingredient.containsEgg ? "🥚" : ""} {rec.ingredient.containsSoy ? "🟢" : ""}
-                                {rec.ingredient.containsNut ? "🥜" : ""} {rec.ingredient.animalBased ? "🐄" : ""} {rec.ingredient.isMeat ? "🥩" : ""} {rec.ingredient.isFish ? "🐟" : ""}
+                        <section className="container" id="ingredients" key={rec.ingredient.id}>
+                            {rec.measurement.quantity} {rec.measurement.unit.abbreviation} {rec.ingredient.name} (Optional: {rec.isOptional ? "Yes" : "No"})
+                            <small>{rec.ingredient.containsDairy ? " 🥛" : ""} {rec.ingredient.containsGluten ? " 🌾" : ""} {rec.ingredient.containsEgg ? " 🥚" : ""} {rec.ingredient.containsSoy ? " 🟢" : ""}
+                                {rec.ingredient.containsNut ? " 🥜" : ""} {rec.ingredient.animalBased ? " 🐄" : ""} {rec.ingredient.isMeat ? " 🥩" : ""} {rec.ingredient.isFish ? " 🐟" : ""}
                             </small>
-                        </li>
+                        </section>
                     </>
                 )
             })
@@ -152,14 +155,17 @@ function Recipe() {
                             <div className="col">
                                 <section id="items">
                                     <h2 className="header">Ingredients</h2>
-                                    <p><small>Key: Contains Dairy (🥛), Contains Gluten (🌾), Contains Egg (🥚), Contains Soy (🟢), Contains Nut (🥜) Animal Based (🐄), Is Meat (🥩), Is Fish (🐟)</small></p>
-                                    <p>{ingredients}</p>
+                                    <small className="container" id="legend">
+                                        Key: Contains Dairy 🥛, Contains Gluten 🌾, Contains Egg 🥚, Contains Soy 🟢, Contains Nut 🥜, Animal Based 🐄, Is Meat 🥩, Is Fish 🐟
+                                    </small>
+                                    <br></br>
+                                    <h5>{ingredients}</h5>
                                 </section>
                             </div>
                             <div className="col-9">
                                 <section id="instructions">
                                     <h2 className="header">Directions</h2>
-                                    <p>{directions}</p>
+                                    <ol>{directions}</ol>
                                 </section>
                             </div>
                         </div>

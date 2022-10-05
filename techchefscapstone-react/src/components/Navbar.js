@@ -14,8 +14,8 @@ function Navbar() {
                 </form>
                 <ul className="navbar-nav col-3">
                     <li className='nav-item'><Link className="nav-link" to="/">Home</Link></li>
-                    <li className='nav-item'><Link className="nav-link" to="/techchefs/add">Create</Link></li>
-                    <li className='nav-item'><Link className="nav-link" to="/techchefs">Recipes List</Link></li>
+                    <li className='nav-item'><Link className="nav-link" to="/recipe/add">Create</Link></li>
+                    <li className='nav-item'><Link className="nav-link" to="/recipes">Recipes List</Link></li>
                     <li className='nav-item'><Link type="button" className="btn btn-primary btn-lg" to="/loginpage">Login</Link></li>
                 </ul>
             </div>

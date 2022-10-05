@@ -21,11 +21,11 @@ function App() {
             <Home />
           </Route>
 
-          <Route path={["/techchefs/add", "/techchefs/edit/:id"]}>
+          <Route path={["/recipe/add", "/recipe/edit/:id"]}>
             <RecipeForm />
           </Route>
 
-          <Route path="/techchefs" exact>
+          <Route path="/recipes" exact>
             <RecipeList />
           </Route>
 

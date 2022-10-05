@@ -134,7 +134,7 @@ h1 {
   height: 60px;
 }
 
-#diet {
+#dietform {
   background-color: chartreuse;
   height: 500px;
 }
@@ -146,4 +146,17 @@ h1 {
 
 .card {
   width: 30rem;
+}
+
+/* RECIPE FORM CSS */
+#legend {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  background-color: #F7C783;
+}
+
+#ingredients {
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
 }
