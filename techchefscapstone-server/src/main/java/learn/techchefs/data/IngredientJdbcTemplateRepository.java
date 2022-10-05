@@ -33,7 +33,6 @@ public class IngredientJdbcTemplateRepository implements IngredientRepository {
                     "fish, " +
                     "animal_based, " +
                     "contains_gluten, " +
-                    "kosher, " +
                     "contains_egg, " +
                     "contains_soy " +
                 "from ingredient";

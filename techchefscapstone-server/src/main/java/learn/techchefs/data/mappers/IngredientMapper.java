@@ -16,7 +16,6 @@ public class IngredientMapper implements RowMapper <Ingredient> {
         ingredient.setParentId(rs.getInt("parent_id"));
         ingredient.setContainsDairy(rs.getBoolean("contains_dairy"));
         ingredient.setNutBased(rs.getBoolean("nut_based"));
-        ingredient.setKosher(rs.getBoolean("kosher"));
         if (rs.getBoolean("contains_gluten")) {
             ingredient.setContainsGluten(true);
             ingredient.setContainsSoy(rs.getBoolean("contains_soy"));

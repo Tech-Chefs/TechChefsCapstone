@@ -1,5 +1,5 @@
 @base_url = http://localhost:8080/api/techchefs
-@token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ0ZWNoLWNoZWZzLWFwaSIsInN1YiI6ImFkbWluMSIsImF1dGhvcml0aWVzIjoiUk9MRV9BRE1JTiIsImV4cCI6MTY2NDg5NjQyMH0.6vwEo7eTFzChQY-lGh7nfJ1zRYT060vFui-d0VXCh5g
+@token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ0ZWNoLWNoZWZzLWFwaSIsInN1YiI6ImFkbWluMSIsImF1dGhvcml0aWVzIjoiUk9MRV9BRE1JTiIsImV4cCI6MTY2NDkxNzAzMH0.nMZNfnwG31vjO-TJtu7kdWaitMWyR1seipet_vmkj-Q
 
 POST http://localhost:8080/api/authenticate HTTP/1.1
 Content-Type: application/json
