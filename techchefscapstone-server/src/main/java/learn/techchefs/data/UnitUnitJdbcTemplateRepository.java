@@ -49,8 +49,8 @@ public class UnitUnitJdbcTemplateRepository implements UnitUnitRepository {
     public Map <Unit, List <Measurement>> findByIngredient(Map <Integer, Unit> units, int ingredientId) {
         Map <Unit, List <Measurement>> unitMeasurementMap = findAll(units);
         final String sql = "select " +
-                    "unit_id_1, " +
-                    "unit_id_2, " +
+                    "unit_1_id, " +
+                    "unit_2_id, " +
                     "factor " +
                 "from ingredient_unit_unit " +
                 "where ingredient_id = ?";

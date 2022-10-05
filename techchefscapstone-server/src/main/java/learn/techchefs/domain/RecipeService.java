@@ -134,7 +134,7 @@ public class RecipeService {
     private void setRecipeParams (Recipe recipe) {
         List <RecipeIngredient> recipeIngredients =
                 recipeIngredientRepository.findByRecipe(ingredients, units, recipe.getId());
-        for (RecipeIngredient recipeIngredient : recipeIngredients) setAltMeasurements(recipeIngredient);
+        //for (RecipeIngredient recipeIngredient : recipeIngredients) setAltMeasurements(recipeIngredient);
         recipe.setIngredients(recipeIngredients);
         recipe.setDirections(directionRepository.findByRecipe(recipe.getId()));
     }

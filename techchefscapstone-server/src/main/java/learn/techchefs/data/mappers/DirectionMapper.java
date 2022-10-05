@@ -1,6 +1,5 @@
 package learn.techchefs.data.mappers;
 
-import learn.techchefs.models.Direction;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

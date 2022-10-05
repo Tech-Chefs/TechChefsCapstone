@@ -1,7 +1,6 @@
 package learn.techchefs.data;
 
 import learn.techchefs.data.mappers.DirectionMapper;
-import learn.techchefs.models.Direction;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
@@ -20,10 +19,10 @@ public class DirectionJdbcTemplateRepository implements DirectionRepository {
 
     @Override
     public List <String> findByRecipe(int recipeId) {
-        final String sql = "select instruction from recipe_direction" +
+        final String sql = "select instruction from recipe_direction " +
                 "where recipe_id = ? " +
                 "order by step_num";
-        return jdbcTemplate.query(sql, new DirectionMapper());
+        return jdbcTemplate.query(sql, new DirectionMapper(), recipeId);
     }
 
     @Override
