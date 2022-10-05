@@ -26,9 +26,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET,
                         "/api/techchefs", "/api/techchefs/**", "/api/techchefs/*/*").permitAll()
                 .antMatchers(HttpMethod.POST,
-                        "/api/techchefs/*").hasAnyRole("USER", "ADMIN")
+                        "/api/techchefs/RecipeService","/api/techchefs/IngredientService").hasAnyRole("USER", "ADMIN")
                 .antMatchers(HttpMethod.PUT,
-                        "/api/techchefs/*").hasAnyRole("USER", "ADMIN")
+                        "/api/techchefs/RecipeService/*","/api/techchefs/IngredientService/*").hasAnyRole("USER", "ADMIN")
                 .antMatchers(HttpMethod.DELETE,
                         "/api/techchefs/*").hasAnyRole("ADMIN")
                 // if we get to this point, let's deny all requests

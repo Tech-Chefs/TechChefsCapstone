@@ -1,5 +1,5 @@
 @base_url = http://localhost:8080/api/techchefs
-@token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ0ZWNoLWNoZWZzLWFwaSIsInN1YiI6ImFkbWluMSIsImF1dGhvcml0aWVzIjoiUk9MRV9BRE1JTiIsImV4cCI6MTY2NDkxNzAzMH0.nMZNfnwG31vjO-TJtu7kdWaitMWyR1seipet_vmkj-Q
+@token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ0ZWNoLWNoZWZzLWFwaSIsInN1YiI6ImFkbWluMSIsImF1dGhvcml0aWVzIjoiUk9MRV9BRE1JTiIsImV4cCI6MTY2NDk4MDUzOH0.Yp5wlcz_tqakVRYIlIwz21P1jY1retUpPnftilmScsc
 
 POST http://localhost:8080/api/authenticate HTTP/1.1
 Content-Type: application/json
@@ -32,20 +32,29 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "name": "PB&J",
-  "Description": "Peanut Butter and Jelly"
+    "user_id": 4,
+    "name": "PB&J",
+    "description": "Peanut Butter and Jelly update",
+    "directions": [],
+    "recipeIngredients": []
 }
 
 ### Add Ingredient
 
 POST {{base_url}}/IngredientService HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
-  "name": "Peanut Butter",
-  "parent_id": 1,
-  "contains_dairy": 1,
-  "nut_based": 1
+    "name": "Peanut Butter",
+    "containsDairy": false,
+    "nutBased": false,
+    "containsEgg": false,
+    "containsGluten": false,
+    "containsSoy": false,
+    "animalBased": false,
+    "meat": false,
+    "fish": false
 }
 
 ### Update Recipe
@@ -55,16 +64,18 @@ Content-Type: application/json
 
 {
   "name": "PB&J",
-  "Description": "Peanut Butter and Jelly update"
+  "Description": "Peanut Butter and Jelly update",
+  "directions": [],
+    "recipeIngredients": []
 }
 
 ### Update Ingredient
 
-PUT {{base_url}}/IngredientService/1 HTTP/1.1
+PUT {{base_url}}/IngredientService/3 HTTP/1.1
 Content-Type: application/json
 
 {
-  "name": "PB"
+  "name": "black peppper"
 }
 
 ### Delete Recipe

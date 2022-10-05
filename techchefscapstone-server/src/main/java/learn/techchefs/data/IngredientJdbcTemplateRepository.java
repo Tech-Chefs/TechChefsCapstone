@@ -60,7 +60,6 @@ public class IngredientJdbcTemplateRepository implements IngredientRepository {
                     "fish, " +
                     "animal_based, " +
                     "contains_gluten, " +
-                    "kosher, " +
                     "contains_egg, " +
                     "contains_soy " +
                 "from ingredient where parent_id = ?";
@@ -82,7 +81,6 @@ public class IngredientJdbcTemplateRepository implements IngredientRepository {
                     "fish, " +
                     "animal_based, " +
                     "contains_gluten, " +
-                    "kosher, " +
                     "contains_egg, " +
                     "contains_soy " +
                 "from ingredient where id = ?";
@@ -95,8 +93,8 @@ public class IngredientJdbcTemplateRepository implements IngredientRepository {
     @Override
     public Ingredient add(Ingredient ingredient) {
         final String sql = "insert into ingredient (name, user_id, contains_dairy, nut_based, meat, fish, animal_based, " +
-                "contains_gluten, kosher, contains_egg, contains_soy) values " +
-                "(?,?,?,?,?,?,?,?,?,?)";
+                "contains_gluten, contains_egg, contains_soy) values " +
+                "(?,?,?,?,?,?,?,?,?)";
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -110,23 +108,22 @@ public class IngredientJdbcTemplateRepository implements IngredientRepository {
                     statement.setBoolean(5, true);
                     statement.setBoolean(6, ingredient.isFish());
                 }
-                statement.setBoolean(10, ingredient.isContainsEgg());
+                statement.setBoolean(9, ingredient.isContainsEgg());
             }
             else {
                 statement.setBoolean(7, false);
                 statement.setBoolean(5, false);
                 statement.setBoolean(6, false);
-                statement.setBoolean(10, false);
+                statement.setBoolean(9, false);
             }
             if (ingredient.isContainsGluten()) {
                 statement.setBoolean(8, true);
-                statement.setBoolean(11, ingredient.isContainsSoy());
+                statement.setBoolean(10, ingredient.isContainsSoy());
             }
             else {
                 statement.setBoolean(8, false);
-                statement.setBoolean(11, false);
+                statement.setBoolean(10, false);
             }
-            statement.setBoolean(9, ingredient.isKosher());
             return statement;
         }, keyHolder);
 
@@ -147,7 +144,6 @@ public class IngredientJdbcTemplateRepository implements IngredientRepository {
                     "fish = ?, " +
                     "animal_based = ?, " +
                     "contains_gluten = ?, " +
-                    "kosher = ?, " +
                     "contains_egg = ?, " +
                     "contains_soy = ? " +
                 "where id = ?";
@@ -160,7 +156,6 @@ public class IngredientJdbcTemplateRepository implements IngredientRepository {
                 ingredient.isFish(),
                 ingredient.getAnimalBased(),
                 ingredient.isContainsGluten(),
-                ingredient.isKosher(),
                 ingredient.isContainsEgg(),
                 ingredient.isContainsSoy(),
                 ingredient.getId());
