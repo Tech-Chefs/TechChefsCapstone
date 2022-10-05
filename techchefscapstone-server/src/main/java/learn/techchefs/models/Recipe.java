@@ -8,7 +8,7 @@ public class Recipe {
     private String name;
     private String description;
     private List <RecipeIngredient> ingredients;
-    private List <Direction> directions;
+    private List <String> directions;
 
     public int getId() {
         return id;
@@ -50,11 +50,11 @@ public class Recipe {
         this.ingredients = ingredients;
     }
 
-    public List<Direction> getDirections() {
+    public List<String> getDirections() {
         return directions;
     }
 
-    public void setDirections(List<Direction> directions) {
+    public void setDirections(List<String> directions) {
         this.directions = directions;
     }
 }
