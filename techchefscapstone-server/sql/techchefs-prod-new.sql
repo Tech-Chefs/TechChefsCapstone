@@ -43,7 +43,6 @@ create table ingredient (
     fish bit not null,
     animal_based bit not null,
     contains_gluten bit not null,
-    kosher bit not null,
     contains_egg bit not null,
     contains_soy bit not null,
     constraint fk_ingredient_user_id
