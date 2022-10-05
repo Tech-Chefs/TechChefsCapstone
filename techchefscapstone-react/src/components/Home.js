@@ -1,18 +1,18 @@
 function Home() {
     return (
         <>
-            <body>
-                <div className="homebody">
-                    <section className="home">
-                        <h1>Welcome to TechChefs!</h1>
-                    </section>
+            <div className="homebody">
+                <section className="home">
+                    <h1>Welcome to TechChefs!</h1>
 
-                    <form className="d-flex col-7" role="search">
-                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                        <button className="btn btn-outline-success bi bi-search" type="submit"></button>
+                    <form role="search">
+                        <div className="input-group mb-3">
+                            <input type="text" className="form-control" placeholder="Search" aria-label="Search" aria-describedby="button-addon2" />
+                            <button className="btn btn-success bi bi-search" type="submit" id="button-addon2"></button>
+                        </div>
                     </form>
-                </div>
-            </body>
+                </section>
+            </div>
         </>
     )
 }

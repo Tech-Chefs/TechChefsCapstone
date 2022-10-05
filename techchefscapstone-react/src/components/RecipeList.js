@@ -126,9 +126,9 @@ function RecipeList() {
 
     return (
         <>
-            <section className="home">
+            <header>
                 <h1 className="heroSection">Recipes</h1>
-            </section>
+            </header>
             <div className="container-fluid">
                 {recipes.map(recipe => (
                     <div className="card" key={recipe.id}>

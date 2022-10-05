@@ -19,9 +19,16 @@
 }
 
 .homebody {
+  background:url(../images/) no-repeat center center fixed;
+  background-size: cover;
+  background-position: center;
   display: flex;
   align-items: center;
   flex-direction: column;
+  height: 100vh; 
+}
+
+.home {
   margin-top: 275px;
 }
 
@@ -30,6 +37,9 @@ h1 {
   padding: 20px;
   font-size: 64px;
 }
+
+
+
 
 
 /* LOGIN PAGE CSS */
@@ -44,6 +54,10 @@ h1 {
 .loginButton {
   text-align: center;
 }
+
+
+
+
 
 /* PROFILE CSS */
 
@@ -79,7 +93,10 @@ h1 {
   align-items: center ;
 }
 
-/* RECIPE CSS */
+
+
+
+/* RECIPE MAXIMIZED CSS */
 #recipeCarousel {
   border: solid;
   height: 300px;
@@ -100,44 +117,24 @@ h1 {
   font-family: 'Libre Baskerville', serif
 }
 
+
+
+
+
 /* CREATE A RECIPE CSS */
-#recipeName {
-  background-color: #314295;
-  height: 60px;
+
+.ingreButton {
+  height: fit-content;
+  float: right;
 }
 
-#desc {
-  background-color: chartreuse;
-  height: 300px;
-}
 
-#ingre {
-  background-color: cornflowerblue;
-  height: 300px;
-  display: flex;
-}
-
-.IngreButton {
-  align-self: flex-end;
-  margin: 10px;
-}
-
-#direc {
-  background-color: darkblue;
-  height: 300px;
-}
 
 /* CREATE A INGREDIENT CSS */
 
-#ingreName {
-  background-color: #314295;
-  height: 60px;
-}
 
-#dietform {
-  background-color: chartreuse;
-  height: 500px;
-}
+
+
 
 /* RECIPE LIST CSS */
 .heroSection {
@@ -147,6 +144,9 @@ h1 {
 .card {
   width: 30rem;
 }
+
+
+
 
 /* RECIPE FORM CSS */
 #legend {

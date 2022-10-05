@@ -16,7 +16,8 @@ const INGREDIENTS_DEFAULT = {
     containsSoy: false,
     animalBased: false,
     isMeat: false,
-    isFish: false
+    isFish: false,
+    diet: "Vegan"
 }
 
 
@@ -89,7 +90,10 @@ function Ingredient() {
                 ingredient.isFish = true
                 break
         }
-        console.log(ingredient);
+        const newIngredient = {...ingredient}
+        newIngredient.diet = event.target.value;
+        setIngredient(newIngredient);
+        console.log(ingredient)
     }
     const handleGluten = (event) => {
         switch (event.target.value) {
@@ -204,7 +208,7 @@ function Ingredient() {
                             <h2>Diet Info</h2>
                             <section id="dietform">
                                 <div className="form-group">
-                                    <select id="diet" name="diet" className="form-control" value=""
+                                    <select id="diet" name="diet" className="form-control" value={ingredient.diet}
                                         onChange={handleDiet} >
                                         <option>Vegan</option>
                                         <option>Vegetarian</option>
@@ -214,12 +218,12 @@ function Ingredient() {
                                 </div>
                                 <div className="form-group" /*style={{ display: 'none' }}*/>
                                     <input id="containsEgg" name="containsEgg" type="checkbox" className="mr-2" checked={ingredient.containsEgg}
-                                        onChange={handleChange} />
+                                        onChange={handleChange} disabled={ingredient.diet==="Vegan"}/>
                                     <label htmlFor="tracking">Contains Egg?</label>
                                 </div>
                                 <div className="form-group" /*style={{ display: 'none' }}*/>
                                     <input id="containsDairy" name="containsDairy" type="checkbox" className="mr-2" checked={ingredient.containsDairy}
-                                        onChange={handleChange} />
+                                        onChange={handleChange} disabled={ingredient.diet==="Vegan"}/>
                                     <label htmlFor="tracking">Contains Dairy?</label>
                                 </div>
                                 <div className="form-group">

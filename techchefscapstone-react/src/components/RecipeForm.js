@@ -7,7 +7,7 @@ const RECIPE_DEFAULT =
     id: 0,
     name: "",
     description: "",
-    directions: [],
+    directions: ["",],
     recipeIngredients: []
 }
 
@@ -118,6 +118,18 @@ function RecipeForm() {
 
     const history = useHistory();
 
+    const handleAddDirection = (event) => {
+        const newRecipe = { ...recipe, directions: [...recipe.directions, ""] };
+        setRecipe(newRecipe);
+    }
+
+    const handleDirectionChange = (event,index) => {
+        const newDirections = [...recipe.directions];
+        newDirections[index] = event.target.value;
+        const newRecipe = {...recipe, directions: newDirections};
+        setRecipe(newRecipe);
+    }
+
     const handleChange = (event) => {
         const newRecipe = { ...recipe }
 
@@ -219,35 +231,38 @@ function RecipeForm() {
                     </div>
 
                     <div className="row">
-                        <div className="col-3"></div>
+                        <div className="col-3"></div> {/*for placement design */}
+
                         <div className="col-6">
                             <h2>Ingredients</h2>
                             <section className="row" id="ingre">
-                                <div className='col'>
-                                    <label htmlFor="exampleDataList" className="form-label">Ingredient</label>
-                                    <input className="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." />
-                                    <datalist id="datalistOptions">
-                                        {
-                                            ingredient.map(i => (
-                                                <option key={i.id} value={i.name} />
-                                            ))}
-                                    </datalist>
-                                </div>
-                                <div className='col'>
-                                    <label>Measurement</label>
-                                    <input type="number" className="form-control" id="exampleFormControlInput1" placeholder="0" />
-                                </div>
-                                <div className='col'>
-                                    <label htmlFor="exampleDataList" className="form-label">Unit</label>
-                                    <select id="unitListOptions" className='form-control'>
-                                        {
-                                            unit.map(u => (
-                                                <option key={u.id} value={u.abbr}>{u.abbr}</option>
-                                            ))}
-                                    </select>
-                                </div>
-                                <Link className="IngreButton btn btn-secondary" to="/ingredient">Add Ingredient</Link>
+                                        <div className='col'>
+                                            <label htmlFor="exampleDataList" className="form-label">Ingredient</label>
+                                            <input className="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." />
+                                            <datalist id="datalistOptions">
+                                                {
+                                                    ingredient.map(i => (
+                                                        <option key={i.id} value={i.name} />
+                                                    ))}
+                                            </datalist>
+                                        </div>
+
+                                        <div className='col'>
+                                            <label>Measurement</label>
+                                            <input type="number" className="form-control" id="exampleFormControlInput1" placeholder="0" />
+                                        </div>
+
+                                        <div className='col'>
+                                            <label htmlFor="exampleDataList" className="form-label">Unit</label>
+                                            <select id="unitListOptions" className='form-control'>
+                                                {
+                                                    unit.map(u => (
+                                                        <option key={u.id} value={u.abbr}>{u.abbr}</option>
+                                                    ))}
+                                            </select>
+                                        </div>
                             </section>
+                            <Link className="ingreButton btn btn-secondary" to="/ingredient">Add Ingredient</Link>
                         </div>
                     </div>
                     <div className="row">
@@ -255,12 +270,14 @@ function RecipeForm() {
                         <div className="col-6">
                             <h2>Directions</h2>
                             <ol>
-                                <li>
-                                    <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                </li>
+                                {recipe.directions.map((direction,index) => (
+                                    <li key={index}>
+                                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" value={direction} onChange={(event) => handleDirectionChange(event,index)}></textarea>
+                                    </li>
+                                ))}
                             </ol>
-
                         </div>
+                        <button className="ingreButton btn btn-secondary" onClick={handleAddDirection} type='button'>Add Direction</button>
                     </div>
                     <div className="mt-4">
                         <button className="btn btn-success mr-2" type="submit">
