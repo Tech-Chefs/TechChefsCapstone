@@ -5,10 +5,11 @@ import { Link, useHistory, useParams } from 'react-router-dom';
 const RECIPE_DEFAULT =
 {
     id: 0,
+    userId: 4,
     name: "",
     description: "",
     directions: ["",],
-    recipeIngredients: []
+    ingredients: []
 }
 
 // const INGREDIENT_TEST = [
@@ -64,24 +65,6 @@ const RECIPE_DEFAULT =
 //         isFish: false
 //     }
 // ]
-
-const UNIT_TEST = [
-    {
-        id: 1,
-        name: "Teaspoon",
-        abbr: "Tsp"
-    },
-    {
-        id: 2,
-        name: "Tablespoon",
-        abbr: "Tbsp"
-    },
-    {
-        id: 3,
-        name: "Whole",
-        abbr: "whole"
-    }
-]
 
 function RecipeForm() {
 
@@ -153,6 +136,7 @@ function RecipeForm() {
     }
 
     const addRecipe = () => {
+        console.log(recipe)
         const init = {
             method: "POST",
             headers: {
@@ -161,7 +145,7 @@ function RecipeForm() {
             body: JSON.stringify(recipe)
         }
 
-        fetch(`http://localhost:8080/api/recipe`, init)
+        fetch(`http://localhost:8080/api/techchefs/RecipeService`, init)
             .then(response => {
                 if (response.status === 201 || response.status === 400) {
                     return response.json()
@@ -216,7 +200,7 @@ function RecipeForm() {
     return (
         <>
             <div className="container-fluid">
-                <form>
+                <form onSubmit={handleSubmit}>
                     <div className="row">
                         <div className="col-3">
                             <h2>Recipe Name</h2>
