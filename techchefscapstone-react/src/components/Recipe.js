@@ -157,9 +157,9 @@ function Recipe() {
             return (
                 <>
                     <section className="container" id="ingredients" key={rec.ingredient.id}>
-                        {rec.measurement.quantity} {rec.measurement.unit.abbreviation} {rec.ingredient.name} (Optional: {rec.isOptional ? "Yes" : "No"})
-                        <small>{rec.ingredient.containsDairy ? " 🥛" : ""} {rec.ingredient.containsGluten ? " 🌾" : ""} {rec.ingredient.containsEgg ? " 🥚" : ""} {rec.ingredient.containsSoy ? " 🟢" : ""}
-                            {rec.ingredient.containsNut ? " 🥜" : ""} {rec.ingredient.animalBased ? " 🐄" : ""} {rec.ingredient.isMeat ? " 🥩" : ""} {rec.ingredient.isFish ? " 🐟" : ""}
+                        {rec.measurement.quantity} {rec.measurement.unit.abbr !== "whole" && rec.measurement.unit.abbr} {rec.ingredient.name}{rec.preparation !== "" && (", " + rec.preparation)} {rec.isOptional && "optional"}
+                        <small>{rec.ingredient.containsDairy && " 🥛"} {rec.ingredient.containsGluten && " 🌾"} {rec.ingredient.containsEgg && " 🥚"} {rec.ingredient.containsSoy && " 🟢"}
+                            {rec.ingredient.containsNut && " 🥜"} {rec.ingredient.animalBased ? (rec.ingredient.isMeat ? (rec.ingredient.isFish && "🐟") : "🥦") : "🌱"}
                         </small>
                     </section>
                 </>
@@ -182,7 +182,7 @@ function Recipe() {
                             <section id="items">
                                 <h2 className="header">Ingredients</h2>
                                 <small className="container" id="legend">
-                                    Key: Contains Dairy 🥛, Contains Gluten 🌾, Contains Egg 🥚, Contains Soy 🟢, Contains Nut 🥜, Animal Based 🐄, Is Meat 🥩, Is Fish 🐟
+                                    Key: Contains Dairy 🥛, Contains Gluten 🌾, Contains Egg 🥚, Contains Soy 🟢, Contains Nut 🥜, Vegan 🌱, Vegetarian 🥦, Seafood 🐟
                                 </small>
                                 <br></br>
                                 <h5>{ingredients}</h5>

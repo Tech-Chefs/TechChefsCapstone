@@ -139,7 +139,6 @@ function RecipeForm() {
         newIngredients[index].ingredient.name = event.target.value
         const newRecipe = { ...recipe, ingredients: newIngredients };
         setRecipe(newRecipe);
-
     }
 
     const handleQuantityChange = (event, index) => {
@@ -147,7 +146,6 @@ function RecipeForm() {
         newIngredients[index].measurement.quantity = event.target.value;
         const newRecipe = { ...recipe, ingredients: newIngredients };
         setRecipe(newRecipe);
-
     }
 
     const handleUnitChange = (event, index) => {
@@ -166,6 +164,13 @@ function RecipeForm() {
     const handleOptionalChange = (event, index) => {
         const newIngredients = [...recipe.ingredients];
         newIngredients[index].isOptional = event.target.checked;
+        const newRecipe = { ...recipe, ingredients: newIngredients };
+        setRecipe(newRecipe);
+    }
+
+    const handlePreparationChange = (event, index) => {
+        const newIngredients = [...recipe.ingredients];
+        newIngredients[index].preparation = event.target.value;
         const newRecipe = { ...recipe, ingredients: newIngredients };
         setRecipe(newRecipe);
     }
@@ -274,51 +279,56 @@ function RecipeForm() {
 
                         <div className="row">
                             <div className="col">
-                                {recipe.ingredients.map((recipeIngredient, index) => (
-                                    <>
-                                        <h3>Ingredients</h3>
-                                        <section className="row" id="ingre">
-                                            <div className="col">
-                                                {recipe.ingredients.map((recipeIngredient, index) => (
-                                                    <section className="row" id="ingre">
-                                                        <div className='col-6'>
-                                                            <label htmlFor="exampleDataList" className="form-label">Ingredient:</label>
-                                                            <input className="form-control shadow p-3 mb-3 bg-body rounded" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." key={recipeIngredient.ingredient.id} value={recipeIngredient.ingredient.name} name="ingredient" onChange={(event) => handleIngredientChange(event, index)} />
-                                                            <datalist id="datalistOptions">
-                                                                {
-                                                                    ingredient.map(i => (
-                                                                        <option key={i.id} value={i.name}></option>
-                                                                    ))}
-                                                            </datalist>
-                                                            <Link to="/ingredient">Create New Ingredient</Link>
-                                                        </div>
-                                                        <div className='col'>
-                                                            <label>Measurement</label>
-                                                            <input type="number" step="0.0625" min="0.0" className="form-control shadow p-3 mb-3 bg-body rounded" id="exampleFormControlInput1" placeholder="0" value={recipeIngredient.measurement.quantity} name="measurement.quantity" onChange={(event) => handleQuantityChange(event, index)} />
-                                                        </div>
 
-                                                        <div className='col'>
-                                                            <label htmlFor="exampleDataList" className="form-label">Unit</label>
-                                                            <select id="unitListOptions" className='form-control shadow mb-3 bg-body rounded' value={recipeIngredient.measurement.unit.abbr} onChange={(event) => handleUnitChange(event, index)}>
-                                                                {
-                                                                    unit.map(u => (
-                                                                        <option key={u.id} value={u.abbr}>{u.abbr}</option>
-                                                                    ))}
-                                                            </select>
+                                <h3>Ingredients</h3>
+                                <section className="row" id="ingre">
+                                    <div className="col">
+                                        {recipe.ingredients.map((recipeIngredient, index) => (
+                                            <section className="row" id="ingre">
+                                                <div className='col-6'>
+                                                    <label htmlFor="exampleDataList" className="form-label">Ingredient:</label>
+                                                    <input className="form-control shadow p-3 mb-3 bg-body rounded" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." key={recipeIngredient.ingredient.id} value={recipeIngredient.ingredient.name} name="ingredient" onChange={(event) => handleIngredientChange(event, index)} />
+                                                    <datalist id="datalistOptions">
+                                                        {
+                                                            ingredient.map(i => (
+                                                                <option key={i.id} value={i.name}></option>
+                                                            ))}
+                                                    </datalist>
+                                                    <Link to="/ingredient">Create New Ingredient</Link>
+                                                </div>
+                                                <div className='col'>
+                                                    <label>Measurement</label>
+                                                    <input type="number" step="0.0625" min="0.0" className="form-control shadow p-3 mb-3 bg-body rounded" id="exampleFormControlInput1" placeholder="0" value={recipeIngredient.measurement.quantity} name="measurement.quantity" onChange={(event) => handleQuantityChange(event, index)} />
+                                                </div>
 
-                                                            <div className="form-group">
-                                                                <input id="containsEgg" name="containsEgg" type="checkbox" className="mr-2" checked={recipeIngredient.isOptional} onChange={(event) => handleOptionalChange(event, index)} />
-                                                                <label htmlFor="tracking">optional</label>
-                                                            </div>
+                                                <div className='col'>
+                                                    <label htmlFor="exampleDataList" className="form-label">Unit</label>
+                                                    <select id="unitListOptions" className='form-control shadow mb-3 bg-body rounded' value={recipeIngredient.measurement.unit.abbr} onChange={(event) => handleUnitChange(event, index)}>
+                                                        {
+                                                            unit.map(u => (
+                                                                <option key={u.id} value={u.abbr}>{u.abbr}</option>
+                                                            ))}
+                                                    </select>
+
+                                                    <div className='col'>
+                                                        <label htmlFor="preparation">Preparation (optional):</label>
+                                                        <input id="preparation" name="preparation" type="text" value={recipeIngredient.preparation}
+                                                            className="form-control shadow p-3 mb-2 bg-body rounded" onChange={(event) => handlePreparationChange(event, index)} />
+                                                    </div>
+
+                                                    <div className='col'>
+                                                        <div className="form-group">
+                                                            <input id="isOptional" name="isOptional" type="checkbox" className="mr-2" checked={recipeIngredient.isOptional} onChange={(event) => handleOptionalChange(event, index)} />
+                                                            <label htmlFor="tracking">optional</label>
                                                         </div>
-                                                    </section>
-                                                ))}
-                                                < button className='ingreButton btn btn-secondary' onClick={handleAddIngredient} type='button'>Add Ingredient</button>
-                                            </div>
-                                        </section>
-                                    </>
-                                ))}
-                            </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        ))}
+                                        < button className='ingreButton btn btn-secondary' onClick={handleAddIngredient} type='button'>Add Ingredient</button>
+                                    </div >
+                                </section >
+                            </div >
                         </div >
                         <div className="row" id='directionForm'>
                             <div className="col">
@@ -333,7 +343,7 @@ function RecipeForm() {
                                     </ol>
                                 </section>
                                 <button className="directionBtn btn btn-secondary" onClick={handleAddDirection} type='button'>Add Direction</button>
-                            </div>
+                            </div >
                             <div className="submitCancel mt-4">
                                 <button className="btn btn-primary mr-2" type="submit">
                                     <i className="bi bi-file-earmark-check"></i>
@@ -343,10 +353,10 @@ function RecipeForm() {
                                     <i className='bi bi-stoplights'></i> Cancel
                                 </Link>
                             </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+                        </div >
+                    </form >
+                </div >
+            </div >
         </>
     )
 }
