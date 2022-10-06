@@ -89,7 +89,7 @@ function Ingredient() {
                 ingredient.isFish = true
                 break
         }
-        const newIngredient = {...ingredient}
+        const newIngredient = { ...ingredient }
         newIngredient.diet = event.target.value;
         setIngredient(newIngredient);
     }
@@ -108,7 +108,7 @@ function Ingredient() {
                 ingredient.containsSoy = true
                 break
         }
-        const newIngredient = {...ingredient}
+        const newIngredient = { ...ingredient }
         newIngredient.gluten = event.target.value;
         setIngredient(newIngredient);
     }
@@ -177,81 +177,79 @@ function Ingredient() {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
-                {errors.length > 0 && (
-                    <div className="alert alert-danger">
-                        <p>The following errors were found:</p>
-                        <ul>
-                            {errors.map(error => (
-                                <li key={error}>{error}</li>
-                            ))}
-                        </ul>
-                    </div>
-                )}
-                <div className="container-fluid">
-                    <div className="row">
-                        <div className="col-3">
-                            <h2>Ingredient Name</h2>
-                            <section id="ingreName">
+            <div className='ingredientFormBody'>
+                <form onSubmit={handleSubmit}>
+                    {errors.length > 0 && (
+                        <div className="alert alert-danger">
+                            <p>The following errors were found:</p>
+                            <ul>
+                                {errors.map(error => (
+                                    <li key={error}>{error}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                    <div className="container bg-light">
+                        <div className="row">
+                            <section className="col" id="ingreName">
                                 <div className="form-group">
-                                    <label htmlFor="name">Ingredient:</label>
+                                    <label htmlFor="name"><h3>Ingredient:</h3></label>
                                     <input id="name" name="name" type="text" value={ingredient.name}
                                         className="form-control shadow p-3 mb-3 bg-body rounded" onChange={handleChange} />
                                 </div>
                             </section>
                         </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-3"></div>
-                        <div className="col-6">
-                            <h2>Diet Info</h2>
-                            <section id="dietform">
-                                <div className="form-group shadow  mb-3 bg-body rounded">
-                                    <select id="diet" name="diet" className="form-control" value={ingredient.diet}
-                                        onChange={handleDiet} >
-                                        <option>Vegan</option>
-                                        <option>Vegetarian</option>
-                                        <option>Meat Based</option>
-                                        <option>Seafood</option>
-                                    </select>
+                        <div className="row">
+                            <div className="col">
+                                <h3>Diet Info</h3>
+                                <section id="dietform">
+                                    <div className="form-group shadow  mb-3 bg-body rounded">
+                                        <select id="diet" name="diet" className="form-control" value={ingredient.diet}
+                                            onChange={handleDiet} >
+                                            <option>Vegan</option>
+                                            <option>Vegetarian</option>
+                                            <option>Meat Based</option>
+                                            <option>Seafood</option>
+                                        </select>
+                                    </div>
+                                    <div className="form-group" /*style={{ display: 'none' }}*/>
+                                        <input id="containsEgg" name="containsEgg" type="checkbox" className="mr-2" checked={ingredient.containsEgg}
+                                            onChange={handleChange} disabled={ingredient.diet === "Vegan"} />
+                                        <label htmlFor="tracking">Contains Egg?</label>
+                                    </div>
+                                    <div className="form-group" /*style={{ display: 'none' }}*/>
+                                        <input id="containsDairy" name="containsDairy" type="checkbox" className="mr-2" checked={ingredient.containsDairy}
+                                            onChange={handleChange} disabled={ingredient.diet === "Vegan"} />
+                                        <label htmlFor="tracking">Contains Dairy?</label>
+                                    </div>
+                                    <div className="form-group shadow mb-3 bg-body rounded">
+                                        <select id="material" name="material" className="form-control" value={ingredient.gluten}
+                                            onChange={handleGluten} >
+                                            <option>Gluten Free</option>
+                                            <option>Contains Gluten</option>
+                                            <option>Contains Soy</option>
+                                        </select>
+                                    </div>
+                                    <div className="form-group">
+                                        <input id="nutBased" name="nutBased" type="checkbox" className="mr-2" checked={ingredient.nutBased}
+                                            onChange={handleChange} />
+                                        <label htmlFor="tracking">Nut Based?</label>
+                                    </div>
+                                </section>
+                                <div className="submitCancel mt-4">
+                                    <button className="btn btn-primary mr-2" type="submit">
+                                        <i className="bi bi-file-earmark-check"></i>
+                                        {id ? " Update Ingredient" : " Add Ingredient"}
+                                    </button>
+                                    <Link className='btn btn-danger' to="/recipe/add">
+                                        <i className='bi bi-stoplights'></i> Cancel
+                                    </Link>
                                 </div>
-                                <div className="form-group" /*style={{ display: 'none' }}*/>
-                                    <input id="containsEgg" name="containsEgg" type="checkbox" className="mr-2" checked={ingredient.containsEgg}
-                                        onChange={handleChange} disabled={ingredient.diet==="Vegan"}/>
-                                    <label htmlFor="tracking">Contains Egg?</label>
-                                </div>
-                                <div className="form-group" /*style={{ display: 'none' }}*/>
-                                    <input id="containsDairy" name="containsDairy" type="checkbox" className="mr-2" checked={ingredient.containsDairy}
-                                        onChange={handleChange} disabled={ingredient.diet==="Vegan"}/>
-                                    <label htmlFor="tracking">Contains Dairy?</label>
-                                </div>
-                                <div className="form-group shadow mb-3 bg-body rounded">
-                                    <select id="material" name="material" className="form-control" value={ingredient.gluten}
-                                        onChange={handleGluten} >
-                                        <option>Gluten Free</option>
-                                        <option>Contains Gluten</option>
-                                        <option>Contains Soy</option>
-                                    </select>
-                                </div>
-                                <div className="form-group">
-                                    <input id="nutBased" name="nutBased" type="checkbox" className="mr-2" checked={ingredient.nutBased}
-                                        onChange={handleChange} />
-                                    <label htmlFor="tracking">Nut Based?</label>
-                                </div>
-                            </section>
-                            <div className="submitCancel mt-4">
-                                <button className="btn btn-primary mr-2" type="submit">
-                                    <i className="bi bi-file-earmark-check"></i>
-                                    {id ? " Update Ingredient" : " Add Ingredient"}
-                                </button>
-                                <Link className='btn btn-danger' to="/recipe/add">
-                                    <i className='bi bi-stoplights'></i> Cancel
-                                </Link>
                             </div>
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </>
     )
 }

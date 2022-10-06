@@ -61,7 +61,7 @@ h1 {
   display: flex;
   align-items: center;
   flex-direction: column;
-  background:url(../images/pexels-photo-5677627.jpeg) no-repeat center center fixed;
+  background:url(../images/pexels-photo-5946083.jpeg) no-repeat center center ;
   background-size: cover;
   background-position: center;
   height: 100vh; 
@@ -72,7 +72,7 @@ h1 {
 }
 
 .security {
-  margin-top: 250px;
+  margin-top: 300px;
 }
 
 
@@ -160,9 +160,12 @@ h1 {
   font-family: 'Roboto', sans-serif;
 }
 
+#ingre
+
 .ingreButton {
   height: fit-content;
   float: right;
+  margin-right: 20px;
 }
 
 #directionForm{
@@ -173,12 +176,41 @@ h1 {
 
 .directionBtn {
   float: right;
+  margin-right: 20px;
 }
 
 .submitCancel {
   text-align: center;
+  padding-bottom: 20px;
 }
 
-h2 {
+h3 {
   font-family: 'Libre Baskerville', serif;
 }
+
+.recipeFormBody {
+  background:url(../images/pexels-photo-7720538.jpeg) no-repeat center center fixed;
+  background-size: cover;
+  background-position: center;
+  height: auto; 
+  border-top: solid 1px #F8F9FA;
+
+}
+
+.directionSec {
+  margin-right: 30px;
+}
+
+.ingredientFormBody {
+  background:url(../images/pexels-photo-7615467.jpeg) no-repeat center center fixed;
+  background-size: cover;
+  background-position: center;
+  height: 100vh; 
+  border-top: solid 1px #F8F9FA;
+}
+
+form {
+  margin-top: 60px;
+  
+}
+

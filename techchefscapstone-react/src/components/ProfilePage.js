@@ -5,6 +5,8 @@ function ProfilePage() {
                 <div className="row">
                     <div className="col-2">
                         <section className="profilePicture">PP</section>
+                        <img src="" class="img-fluid" alt="..."/>
+
                     </div>
                     <div className="col-9">
                         <section className="bio">Bio</section>
