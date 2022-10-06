@@ -123,7 +123,7 @@ public class Ingredient {
         return isMeat;
     }
 
-    public void setMeat(boolean meat) {
+    public void setIsMeat(boolean meat) {
         isMeat = meat;
     }
 
@@ -131,7 +131,7 @@ public class Ingredient {
         return isFish;
     }
 
-    public void setFish(boolean fish) {
+    public void setIsFish(boolean fish) {
         isFish = fish;
     }
 

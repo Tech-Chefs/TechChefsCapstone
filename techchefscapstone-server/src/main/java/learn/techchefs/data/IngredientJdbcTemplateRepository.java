@@ -102,28 +102,12 @@ public class IngredientJdbcTemplateRepository implements IngredientRepository {
             statement.setInt(2, ingredient.getUserId());
             statement.setBoolean(3,ingredient.isContainsDairy());
             statement.setBoolean(4,ingredient.isNutBased());
-            if(ingredient.getAnimalBased()) {
-                statement.setBoolean(7, true);
-                if (ingredient.isMeat()) {
-                    statement.setBoolean(5, true);
-                    statement.setBoolean(6, ingredient.isFish());
-                }
-                statement.setBoolean(9, ingredient.isContainsEgg());
-            }
-            else {
-                statement.setBoolean(7, false);
-                statement.setBoolean(5, false);
-                statement.setBoolean(6, false);
-                statement.setBoolean(9, false);
-            }
-            if (ingredient.isContainsGluten()) {
-                statement.setBoolean(8, true);
-                statement.setBoolean(10, ingredient.isContainsSoy());
-            }
-            else {
-                statement.setBoolean(8, false);
-                statement.setBoolean(10, false);
-            }
+            statement.setBoolean(5, ingredient.isMeat());
+            statement.setBoolean(6, ingredient.isFish());
+            statement.setBoolean(7, ingredient.isAnimalBased());
+            statement.setBoolean(8, ingredient.isContainsGluten());
+            statement.setBoolean(9, ingredient.isContainsEgg());
+            statement.setBoolean(10, ingredient.isContainsSoy());
             return statement;
         }, keyHolder);
 

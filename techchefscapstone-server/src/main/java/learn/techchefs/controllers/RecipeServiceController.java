@@ -26,18 +26,18 @@ public class RecipeServiceController {
         return service.findAll();
     }
 
-    @GetMapping("/{ingredient}")
+    /*@GetMapping("/{ingredient}")
     public List<Recipe> findByIngredients(@PathVariable List<Ingredient> ingredients) throws DataAccessException {
         return service.findByIngredients(ingredients);
-    }
+    }*/
 
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable int id) throws DataAccessException {
-        Result<Recipe> recipe = service.findById(id);
-        if (recipe == null) {
+        Result<Recipe> result = service.findById(id);
+        if (result == null) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(recipe, HttpStatus.OK);
+        return new ResponseEntity<>(result.getPayload(), HttpStatus.OK);
     }
 
     @PostMapping

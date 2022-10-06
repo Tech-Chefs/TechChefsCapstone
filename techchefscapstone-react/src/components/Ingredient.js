@@ -3,12 +3,10 @@ import { Link, useHistory, useParams } from 'react-router-dom';
 
 
 const INGREDIENTS_DEFAULT = {
-    userId: 0,
+    userId: 4,
     name: "",
     parentId: 0,
-    subIngredients: [
-
-    ],
+    subIngredients: [],
     containsDairy: false,
     nutBased: false,
     containsEgg: false,
@@ -17,7 +15,8 @@ const INGREDIENTS_DEFAULT = {
     animalBased: false,
     isMeat: false,
     isFish: false,
-    diet: "Vegan"
+    diet: "Vegan",
+    gluten: "Gluten Free"
 }
 
 
@@ -93,7 +92,6 @@ function Ingredient() {
         const newIngredient = {...ingredient}
         newIngredient.diet = event.target.value;
         setIngredient(newIngredient);
-        console.log(ingredient)
     }
     const handleGluten = (event) => {
         switch (event.target.value) {
@@ -110,7 +108,9 @@ function Ingredient() {
                 ingredient.containsSoy = true
                 break
         }
-        console.log(ingredient)
+        const newIngredient = {...ingredient}
+        newIngredient.gluten = event.target.value;
+        setIngredient(newIngredient);
     }
 
     const addIngredient = () => {
@@ -122,7 +122,7 @@ function Ingredient() {
             body: JSON.stringify(ingredient)
         }
 
-        fetch(`http://localhost:8080/api/ingredients`, init)
+        fetch(`http://localhost:8080/api/techchefs/IngredientService`, init)
             .then(response => {
                 if (response.status === 201 || response.status === 400) {
                     return response.json()
@@ -227,7 +227,7 @@ function Ingredient() {
                                     <label htmlFor="tracking">Contains Dairy?</label>
                                 </div>
                                 <div className="form-group">
-                                    <select id="material" name="material" className="form-control" value=""
+                                    <select id="material" name="material" className="form-control" value={ingredient.gluten}
                                         onChange={handleGluten} >
                                         <option>Gluten Free</option>
                                         <option>Contains Gluten</option>

@@ -43,18 +43,18 @@ Authorization: Bearer {{token}}
 
 POST {{base_url}}/IngredientService HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer {{token}}
 
 {
-    "name": "Peanut Butter",
+    "userId": 4,
+    "name": "Calamari",
     "containsDairy": false,
     "nutBased": false,
     "containsEgg": false,
     "containsGluten": false,
     "containsSoy": false,
-    "animalBased": false,
-    "meat": false,
-    "fish": false
+    "animalBased": true,
+    "isMeat": true,
+    "isFish": true
 }
 
 ### Update Recipe

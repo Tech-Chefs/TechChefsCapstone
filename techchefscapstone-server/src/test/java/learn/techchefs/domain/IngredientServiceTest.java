@@ -2,7 +2,6 @@ package learn.techchefs.domain;
 
 import learn.techchefs.data.IngredientRepository;
 import learn.techchefs.models.Ingredient;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,14 +46,14 @@ class IngredientServiceTest {
             ingredient = new Ingredient();
             ingredient.setId(4);
             ingredient.setName("chicken");
-            ingredient.setMeat(true);
+            ingredient.setIsMeat(true);
             ingredient.setAnimalBased(true);
             ingredients.add(ingredient);
             ingredient = new Ingredient();
             ingredient.setId(5);
             ingredient.setName("Salmon");
-            ingredient.setMeat(true);
-            ingredient.setFish(true);
+            ingredient.setIsMeat(true);
+            ingredient.setIsFish(true);
             ingredient.setAnimalBased(true);
             ingredients.add(ingredient);
             ingredient = new Ingredient();

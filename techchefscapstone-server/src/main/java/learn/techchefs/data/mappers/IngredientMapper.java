@@ -27,19 +27,19 @@ public class IngredientMapper implements RowMapper <Ingredient> {
         if (rs.getBoolean("animal_based")) {
             ingredient.setAnimalBased(true);
             if (rs.getBoolean("meat")) {
-                ingredient.setMeat(true);
-                ingredient.setFish(rs.getBoolean("fish"));
+                ingredient.setIsMeat(true);
+                ingredient.setIsFish(rs.getBoolean("fish"));
             }
             else {
-                ingredient.setMeat(false);
-                ingredient.setFish(false);
+                ingredient.setIsMeat(false);
+                ingredient.setIsFish(false);
             }
             ingredient.setContainsEgg(rs.getBoolean("contains_egg"));
         }
         else {
             ingredient.setAnimalBased(false);
-            ingredient.setMeat(false);
-            ingredient.setFish(false);
+            ingredient.setIsMeat(false);
+            ingredient.setIsFish(false);
             ingredient.setContainsEgg(false);
         }
         return ingredient;

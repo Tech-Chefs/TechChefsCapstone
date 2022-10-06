@@ -141,7 +141,7 @@ class RecipeServiceTest {
             ingredient = new Ingredient();
             ingredient.setId(8);
             ingredient.setName("Ground Beef");
-            ingredient.setMeat(true);
+            ingredient.setIsMeat(true);
             ingredient.setAnimalBased(true);
             ingredients.add(ingredient);
             ingredient = new Ingredient();
