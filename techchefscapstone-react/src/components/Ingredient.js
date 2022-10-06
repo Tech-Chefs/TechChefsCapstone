@@ -178,7 +178,6 @@ function Ingredient() {
     return (
         <>
             <form onSubmit={handleSubmit}>
-                <h2 className="mb-4">{id ? "Update Ingredient" : "Add Ingredient"}</h2>
                 {errors.length > 0 && (
                     <div className="alert alert-danger">
                         <p>The following errors were found:</p>
@@ -197,7 +196,7 @@ function Ingredient() {
                                 <div className="form-group">
                                     <label htmlFor="name">Ingredient:</label>
                                     <input id="name" name="name" type="text" value={ingredient.name}
-                                        className="form-control" onChange={handleChange} />
+                                        className="form-control shadow p-3 mb-3 bg-body rounded" onChange={handleChange} />
                                 </div>
                             </section>
                         </div>
@@ -207,7 +206,7 @@ function Ingredient() {
                         <div className="col-6">
                             <h2>Diet Info</h2>
                             <section id="dietform">
-                                <div className="form-group">
+                                <div className="form-group shadow  mb-3 bg-body rounded">
                                     <select id="diet" name="diet" className="form-control" value={ingredient.diet}
                                         onChange={handleDiet} >
                                         <option>Vegan</option>
@@ -226,7 +225,7 @@ function Ingredient() {
                                         onChange={handleChange} disabled={ingredient.diet==="Vegan"}/>
                                     <label htmlFor="tracking">Contains Dairy?</label>
                                 </div>
-                                <div className="form-group">
+                                <div className="form-group shadow mb-3 bg-body rounded">
                                     <select id="material" name="material" className="form-control" value={ingredient.gluten}
                                         onChange={handleGluten} >
                                         <option>Gluten Free</option>
@@ -240,12 +239,12 @@ function Ingredient() {
                                     <label htmlFor="tracking">Nut Based?</label>
                                 </div>
                             </section>
-                            <div className="mt-4">
-                                <button className="btn btn-success mr-2" type="submit">
+                            <div className="submitCancel mt-4">
+                                <button className="btn btn-primary mr-2" type="submit">
                                     <i className="bi bi-file-earmark-check"></i>
                                     {id ? " Update Ingredient" : " Add Ingredient"}
                                 </button>
-                                <Link className='btn btn-warning' to="/recipe/add">
+                                <Link className='btn btn-danger' to="/recipe/add">
                                     <i className='bi bi-stoplights'></i> Cancel
                                 </Link>
                             </div>

@@ -165,5 +165,20 @@ h1 {
   float: right;
 }
 
-.directionForm{
+#directionForm{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.directionBtn {
+  float: right;
+}
+
+.submitCancel {
+  text-align: center;
+}
+
+h2 {
+  font-family: 'Libre Baskerville', serif;
 }
