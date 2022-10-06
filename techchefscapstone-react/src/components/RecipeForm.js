@@ -96,7 +96,10 @@ function RecipeForm() {
             .then(response => response.json())
             .then(data => setIngredient(data))
             .catch(console.log)
-        setUnit(UNIT_TEST);
+        fetch("http://localhost:8080/api/techchefs/units")
+            .then(response => response.json())
+            .then(data => setUnit(data))
+            .catch(console.log)
     }, [])
 
     useEffect(() => {
