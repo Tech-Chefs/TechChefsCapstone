@@ -116,6 +116,11 @@ function RecipeForm() {
         setRecipe(newRecipe);
     }
 
+    const handleAddIngredient = (event) => {
+        const newRecipe = {...recipe, ingredients: [...recipe.ingredients, RECIPE_INGREDIENT_DEFAULT]};
+        setRecipe(newRecipe);
+    }
+
     const handleDirectionChange = (event, index) => {
         const newDirections = [...recipe.directions];
         newDirections[index] = event.target.value;
@@ -123,23 +128,45 @@ function RecipeForm() {
         setRecipe(newRecipe);
     }
 
-    const handleRecipeIngredientChange = (event, index) => {
-        const newIngredients = [...recipe.ingredients];
-        newIngredients[index][event.target.name] = event.target.value;
-        const newRecipe = { ...recipe, ingredients: newIngredients };
-        setRecipe(newRecipe);
-        console.log(recipe)
-    }
-
     const handleIngredientChange = (event, index) => {
         const newIngredients = [...recipe.ingredients];
-        
+
         for (let i of ingredient) {
             if (i.name === event.target.value) {
                 newIngredients[index].ingredient = i;
             }
         }
         newIngredients[index].ingredient.name = event.target.value
+        const newRecipe = { ...recipe, ingredients: newIngredients };
+        setRecipe(newRecipe);
+        console.log(recipe)
+    }
+
+    const handleQuantityChange = (event, index) => {
+        const newIngredients = [...recipe.ingredients];
+        newIngredients[index].measurement.quantity = event.target.value;
+        const newRecipe = { ...recipe, ingredients: newIngredients };
+        setRecipe(newRecipe);
+        console.log(recipe)
+    }
+
+    const handleUnitChange = (event, index) => {
+        const newIngredients = [...recipe.ingredients];
+
+        for (let u of unit) {
+            if (u.abbr === event.target.value) {
+                newIngredients[index].measurement.unit = u;
+            }
+        }
+        newIngredients[index].measurement.unit.abbr = event.target.value
+        const newRecipe = { ...recipe, ingredients: newIngredients };
+        setRecipe(newRecipe);
+        console.log(recipe)
+    }
+
+    const handleOptionalChange = (event, index) => {
+        const newIngredients = [...recipe.ingredients];
+        newIngredients[index].isOptional = event.target.checked;
         const newRecipe = { ...recipe, ingredients: newIngredients };
         setRecipe(newRecipe);
         console.log(recipe)
@@ -241,7 +268,6 @@ function RecipeForm() {
                         </div>
                         <div className="col-6 mb-3">
                             <h2>Description</h2>
-                            <label htmlFor="exampleFormControlTextarea1" className="form-label">Example textarea</label>
                             <textarea className="form-control shadow p-3 mb-3 bg-body rounded" id="description" name="description" rows="3" onChange={handleChange}></textarea>
                         </div>
                     </div>
@@ -255,7 +281,7 @@ function RecipeForm() {
                                 <section className="row" id="ingre">
                                     <div className='col'>
                                         <label htmlFor="exampleDataList" className="form-label">Ingredient</label>
-                                        <input className="form-control shadow p-3 mb-3 bg-body rounded" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." key={recipeIngredient.ingredient.id} value={recipeIngredient.ingredient.name} name="ingredient" onChange={(event) => handleIngredientChange(event, index)}/>
+                                        <input className="form-control shadow p-3 mb-3 bg-body rounded" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." key={recipeIngredient.ingredient.id} value={recipeIngredient.ingredient.name} name="ingredient" onChange={(event) => handleIngredientChange(event, index)} />
                                         <datalist id="datalistOptions">
                                             {
                                                 ingredient.map(i => (
@@ -266,12 +292,12 @@ function RecipeForm() {
 
                                     <div className='col'>
                                         <label>Measurement</label>
-                                        <input type="number" className="form-control shadow p-3 mb-3 bg-body rounded" id="exampleFormControlInput1" placeholder="0" value={recipeIngredient.measurement.quantity} />
+                                        <input type="number" step="0.0625" min="0.0" className="form-control shadow p-3 mb-3 bg-body rounded" id="exampleFormControlInput1" placeholder="0" value={recipeIngredient.measurement.quantity} name="measurement.quantity" onChange={(event) => handleQuantityChange(event, index)} />
                                     </div>
 
                                     <div className='col'>
-                                        <label htmlFor="exampleDataList" className="form-label" value={recipeIngredient.measurement.unit}>Unit</label>
-                                        <select id="unitListOptions" className='form-control shadow p-3 mb-3 bg-body rounded'>
+                                        <label htmlFor="exampleDataList" className="form-label">Unit</label>
+                                        <select id="unitListOptions" className='form-control shadow mb-3 bg-body rounded' value={recipeIngredient.measurement.unit.abbr} onChange={(event) => handleUnitChange(event, index)}>
                                             {
                                                 unit.map(u => (
                                                     <option key={u.id} value={u.abbr}>{u.abbr}</option>
@@ -279,8 +305,16 @@ function RecipeForm() {
                                         </select>
                                     </div>
 
+                                    <div className='col'>
+                                        <div className="form-group">
+                                            <input id="containsEgg" name="containsEgg" type="checkbox" className="mr-2" checked={recipeIngredient.isOptional} onChange={(event) => handleOptionalChange(event, index)}/>
+                                            <label htmlFor="tracking">optional</label>
+                                        </div>
+                                    </div>
+
                                 </section>
                             ))}
+                            <button className='btn btn-primary' onClick={handleAddIngredient} type='button'> + </button>
                             <Link className="ingreButton btn btn-secondary" to="/ingredient">Add Ingredient</Link>
                         </div>
                     </div>
