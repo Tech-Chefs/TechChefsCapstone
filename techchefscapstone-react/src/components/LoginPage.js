@@ -42,8 +42,9 @@ export default function LoginPage() {
                     // {
                     //   "jwt_token": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjYWxvcmllLXRyYWNrZXIiLCJzdWIiOiJzbWFzaGRldjUiLCJhdXRob3JpdGllcyI6IlJPTEVfVVNFUiIsImV4cCI6MTYwNTIzNDczNH0.nwWJtPYhD1WlZA9mGo4n5U0UQ3rEW_kulilO2dEg7jo"
                     // }
+                    console.log(data.jwt_token)
                     auth.login(data.jwt_token);
-                    history.push('/');
+                    history.push('/profile');
                 } else {
                     // we have error messages
                     setErrors(['login failed ):']);
@@ -71,9 +72,9 @@ export default function LoginPage() {
                     <br></br>
 
                     <div className="loginButton">
-                        <Link className="btn btn-primary " type="submit" to="/profile">
+                        <button className="btn btn-primary " type="submit">
                             <i class="bi bi-box-arrow-in-right"> Submit </i>
-                        </Link>
+                        </button>
                     </div>
                 </form>
             </body>
