@@ -250,7 +250,7 @@ function RecipeForm() {
                             <Link className="ingreButton btn btn-secondary" to="/ingredient">Add Ingredient</Link>
                         </div>
                     </div>
-                    <div className="row">
+                    <div className="row" id='directionForm'>
                         <div className="col-3"></div>
                         <div className="col-6">
                             <h2>Directions</h2>

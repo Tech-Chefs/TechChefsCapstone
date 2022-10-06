@@ -3,7 +3,7 @@ function Home() {
         <>
             <div className="homebody">
                 <section className="home">
-                    <h1>Welcome to TechChefs!</h1>
+                    <h1 className="welcome">Welcome to TechChefs!</h1>
 
                     <form role="search">
                         <div className="input-group mb-3">

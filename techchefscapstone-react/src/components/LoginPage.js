@@ -4,7 +4,7 @@ function LoginPage() {
     return (
         <>
             <body className="loginBody">
-                <form>
+                <form className="security">
                     <input className="form-control-lg" type="username" placeholder="Username"></input>
 
                     <br></br>
