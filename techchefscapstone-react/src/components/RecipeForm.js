@@ -21,60 +21,6 @@ const RECIPE_DEFAULT =
     ingredients: [RECIPE_INGREDIENT_DEFAULT]
 }
 
-// const INGREDIENT_TEST = [
-//     {
-//         id: 1,
-//         userId: 0,
-//         name: "tomato",
-//         parentId: 0,
-//         subIngredients: [
-
-//         ],
-//         containsDairy: false,
-//         nutBased: false,
-//         containsEgg: false,
-//         containsGluten: false,
-//         containsSoy: false,
-//         animalBased: false,
-//         isMeat: false,
-//         isFish: false
-//     },
-//     {
-//         id: 2,
-//         userId: 0,
-//         name: "Milk",
-//         parentId: 0,
-//         subIngredients: [
-
-//         ],
-//         containsDairy: true,
-//         nutBased: false,
-//         containsEgg: false,
-//         containsGluten: false,
-//         containsSoy: false,
-//         animalBased: true,
-//         isMeat: false,
-//         isFish: false
-//     },
-//     {
-//         id: 3,
-//         userId: 0,
-//         name: "Almond",
-//         parentId: 0,
-//         subIngredients: [
-
-//         ],
-//         containsDairy: false,
-//         nutBased: true,
-//         containsEgg: false,
-//         containsGluten: false,
-//         containsSoy: false,
-//         animalBased: false,
-//         isMeat: false,
-//         isFish: false
-//     }
-// ]
-
 function RecipeForm() {
 
     const [recipe, setRecipe] = useState(RECIPE_DEFAULT);
@@ -119,6 +65,7 @@ function RecipeForm() {
     const handleAddIngredient = (event) => {
         const newRecipe = { ...recipe, ingredients: [...recipe.ingredients, RECIPE_INGREDIENT_DEFAULT] };
         setRecipe(newRecipe);
+        console.log(recipe)
     }
 
     const handleDirectionChange = (event, index) => {
@@ -139,6 +86,7 @@ function RecipeForm() {
         newIngredients[index].ingredient.name = event.target.value
         const newRecipe = { ...recipe, ingredients: newIngredients };
         setRecipe(newRecipe);
+        console.log(recipe)
     }
 
     const handleQuantityChange = (event, index) => {
@@ -281,10 +229,10 @@ function RecipeForm() {
                         <div className="col-6">
                             <h2>Ingredients</h2>
                             {recipe.ingredients.map((recipeIngredient, index) => (
-                                <section className="row" id="ingre">
+                                <section className="row" id="ingre" key={index}>
                                     <div className='col'>
                                         <label htmlFor="exampleDataList" className="form-label">Ingredient</label>
-                                        <input className="form-control shadow p-3 mb-3 bg-body rounded" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." key={recipeIngredient.ingredient.id} value={recipeIngredient.ingredient.name} name="ingredient" onChange={(event) => handleIngredientChange(event, index)} />
+                                        <input className="form-control shadow p-3 mb-3 bg-body rounded" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." key={index} value={recipeIngredient.ingredient.name} name="ingredient" onChange={(event) => handleIngredientChange(event, index)} />
                                         <datalist id="datalistOptions">
                                             {
                                                 ingredient.map(i => (
