@@ -64,9 +64,13 @@ public class RecipeService {
 
     public Result <Recipe> findById (int recipeId) {
         Result <Recipe> result = new Result<>();
-        result.setPayload(repository.findById(recipeId));
-        if (result.getPayload() == null)
+        Recipe recipe = repository.findById(recipeId);
+        if (recipe == null)
             result.addMessage(String.format("Recipe #%d not found", recipeId), ResultType.NOT_FOUND);
+        else {
+            setRecipeParams(recipe);
+            result.setPayload(recipe);
+        }
         return result;
     }
 

@@ -135,6 +135,8 @@ function RecipeList() {
         console.log(`Viewing: ${recipeId}`)
     }
 
+    console.log(recipes)
+
     return (
         <>
             <header>

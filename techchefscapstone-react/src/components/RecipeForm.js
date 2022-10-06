@@ -1,6 +1,15 @@
 import { useEffect, useState } from 'react';
 import { Link, useHistory, useParams } from 'react-router-dom';
 
+const RECIPE_INGREDIENT_DEFAULT = {
+    ingredient: { id: 0, name: "" },
+    measurement: {
+        unit: { abbr: "" },
+        quantity: 0
+    },
+    isOptional: false,
+    preparation: ""
+}
 
 const RECIPE_DEFAULT =
 {
@@ -8,8 +17,8 @@ const RECIPE_DEFAULT =
     userId: 4,
     name: "",
     description: "",
-    directions: ["",],
-    ingredients: []
+    directions: [""],
+    ingredients: [RECIPE_INGREDIENT_DEFAULT]
 }
 
 // const INGREDIENT_TEST = [
@@ -107,11 +116,33 @@ function RecipeForm() {
         setRecipe(newRecipe);
     }
 
-    const handleDirectionChange = (event,index) => {
+    const handleDirectionChange = (event, index) => {
         const newDirections = [...recipe.directions];
         newDirections[index] = event.target.value;
-        const newRecipe = {...recipe, directions: newDirections};
+        const newRecipe = { ...recipe, directions: newDirections };
         setRecipe(newRecipe);
+    }
+
+    const handleRecipeIngredientChange = (event, index) => {
+        const newIngredients = [...recipe.ingredients];
+        newIngredients[index][event.target.name] = event.target.value;
+        const newRecipe = { ...recipe, ingredients: newIngredients };
+        setRecipe(newRecipe);
+        console.log(recipe)
+    }
+
+    const handleIngredientChange = (event, index) => {
+        const newIngredients = [...recipe.ingredients];
+        
+        for (let i of ingredient) {
+            if (i.name === event.target.value) {
+                newIngredients[index].ingredient = i;
+            }
+        }
+        newIngredients[index].ingredient.name = event.target.value
+        const newRecipe = { ...recipe, ingredients: newIngredients };
+        setRecipe(newRecipe);
+        console.log(recipe)
     }
 
     const handleChange = (event) => {
@@ -211,7 +242,7 @@ function RecipeForm() {
                         <div className="col-6 mb-3">
                             <h2>Description</h2>
                             <label htmlFor="exampleFormControlTextarea1" className="form-label">Example textarea</label>
-                            <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            <textarea className="form-control" id="description" name="description" rows="3" onChange={handleChange}></textarea>
                         </div>
                     </div>
 
@@ -220,33 +251,36 @@ function RecipeForm() {
 
                         <div className="col-6">
                             <h2>Ingredients</h2>
-                            <section className="row" id="ingre">
-                                        <div className='col'>
-                                            <label htmlFor="exampleDataList" className="form-label">Ingredient</label>
-                                            <input className="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." />
-                                            <datalist id="datalistOptions">
-                                                {
-                                                    ingredient.map(i => (
-                                                        <option key={i.id} value={i.name} />
-                                                    ))}
-                                            </datalist>
-                                        </div>
+                            {recipe.ingredients.map((recipeIngredient, index) => (
+                                <section className="row" id="ingre">
+                                    <div className='col'>
+                                        <label htmlFor="exampleDataList" className="form-label">Ingredient</label>
+                                        <input className="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." key={recipeIngredient.ingredient.id} value={recipeIngredient.ingredient.name} name="ingredient" onChange={(event) => handleIngredientChange(event, index)} style={{backgroundColor:"red"}}/>
+                                        <datalist id="datalistOptions">
+                                            {
+                                                ingredient.map(i => (
+                                                    <option key={i.id} value={i.name}></option>
+                                                ))}
+                                        </datalist>
+                                    </div>
 
-                                        <div className='col'>
-                                            <label>Measurement</label>
-                                            <input type="number" className="form-control" id="exampleFormControlInput1" placeholder="0" />
-                                        </div>
+                                    <div className='col'>
+                                        <label>Measurement</label>
+                                        <input type="number" className="form-control" id="exampleFormControlInput1" placeholder="0" value={recipeIngredient.measurement.quantity} />
+                                    </div>
 
-                                        <div className='col'>
-                                            <label htmlFor="exampleDataList" className="form-label">Unit</label>
-                                            <select id="unitListOptions" className='form-control'>
-                                                {
-                                                    unit.map(u => (
-                                                        <option key={u.id} value={u.abbr}>{u.abbr}</option>
-                                                    ))}
-                                            </select>
-                                        </div>
-                            </section>
+                                    <div className='col'>
+                                        <label htmlFor="exampleDataList" className="form-label" value={recipeIngredient.measurement.unit}>Unit</label>
+                                        <select id="unitListOptions" className='form-control'>
+                                            {
+                                                unit.map(u => (
+                                                    <option key={u.id} value={u.abbr}>{u.abbr}</option>
+                                                ))}
+                                        </select>
+                                    </div>
+
+                                </section>
+                            ))}
                             <Link className="ingreButton btn btn-secondary" to="/ingredient">Add Ingredient</Link>
                         </div>
                     </div>
@@ -255,9 +289,9 @@ function RecipeForm() {
                         <div className="col-6">
                             <h2>Directions</h2>
                             <ol>
-                                {recipe.directions.map((direction,index) => (
+                                {recipe.directions.map((direction, index) => (
                                     <li key={index}>
-                                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" value={direction} onChange={(event) => handleDirectionChange(event,index)}></textarea>
+                                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" value={direction} onChange={(event) => handleDirectionChange(event, index)}></textarea>
                                     </li>
                                 ))}
                             </ol>
