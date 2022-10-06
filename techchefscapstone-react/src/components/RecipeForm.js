@@ -11,59 +11,59 @@ const RECIPE_DEFAULT =
     recipeIngredients: []
 }
 
-const INGREDIENT_TEST = [
-    {
-        id: 1,
-        userId: 0,
-        name: "tomato",
-        parentId: 0,
-        subIngredients: [
+// const INGREDIENT_TEST = [
+//     {
+//         id: 1,
+//         userId: 0,
+//         name: "tomato",
+//         parentId: 0,
+//         subIngredients: [
 
-        ],
-        containsDairy: false,
-        nutBased: false,
-        containsEgg: false,
-        containsGluten: false,
-        containsSoy: false,
-        animalBased: false,
-        isMeat: false,
-        isFish: false
-    },
-    {
-        id: 2,
-        userId: 0,
-        name: "Milk",
-        parentId: 0,
-        subIngredients: [
+//         ],
+//         containsDairy: false,
+//         nutBased: false,
+//         containsEgg: false,
+//         containsGluten: false,
+//         containsSoy: false,
+//         animalBased: false,
+//         isMeat: false,
+//         isFish: false
+//     },
+//     {
+//         id: 2,
+//         userId: 0,
+//         name: "Milk",
+//         parentId: 0,
+//         subIngredients: [
 
-        ],
-        containsDairy: true,
-        nutBased: false,
-        containsEgg: false,
-        containsGluten: false,
-        containsSoy: false,
-        animalBased: true,
-        isMeat: false,
-        isFish: false
-    },
-    {
-        id: 3,
-        userId: 0,
-        name: "Almond",
-        parentId: 0,
-        subIngredients: [
+//         ],
+//         containsDairy: true,
+//         nutBased: false,
+//         containsEgg: false,
+//         containsGluten: false,
+//         containsSoy: false,
+//         animalBased: true,
+//         isMeat: false,
+//         isFish: false
+//     },
+//     {
+//         id: 3,
+//         userId: 0,
+//         name: "Almond",
+//         parentId: 0,
+//         subIngredients: [
 
-        ],
-        containsDairy: false,
-        nutBased: true,
-        containsEgg: false,
-        containsGluten: false,
-        containsSoy: false,
-        animalBased: false,
-        isMeat: false,
-        isFish: false
-    }
-]
+//         ],
+//         containsDairy: false,
+//         nutBased: true,
+//         containsEgg: false,
+//         containsGluten: false,
+//         containsSoy: false,
+//         animalBased: false,
+//         isMeat: false,
+//         isFish: false
+//     }
+// ]
 
 const UNIT_TEST = [
     {
@@ -92,18 +92,16 @@ function RecipeForm() {
     const [unit, setUnit] = useState([]);
 
     useEffect(() => {
-        // fetch("http://localhost:8080/api/ingredient")
-        //     .then(response => response.json())
-        //     .then(data => setIngredient(data))
-        //     .catch(console.log)
-        setIngredient(INGREDIENT_TEST);
+        fetch("http://localhost:8080/api/techchefs/IngredientService")
+            .then(response => response.json())
+            .then(data => setIngredient(data))
+            .catch(console.log)
         setUnit(UNIT_TEST);
     }, [])
-    console.log(unit)
 
     useEffect(() => {
         if (id) {
-            fetch(`http://localhost:8080/api/recipe/${id}`)
+            fetch(`http://localhost:8080/api/techchefs/RecipeService/${id}`)
                 .then(response => {
                     if (response.status === 200) {
                         return response.json()

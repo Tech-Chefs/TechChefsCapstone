@@ -112,18 +112,32 @@ import { useParams } from "react-router-dom";
 //     }
 // ]
 
-const RECIPE_DEFAULT = {
-    id: 0,
-    userId: 0,
-    name: "",
-    description: "",
-    ingredients: [],
-    directions: []
-}
+// const RECIPE_DEFAULT = {
+//     id: 0,
+//     userId: 0,
+//     name: "",
+//     description: "",
+//     ingredients: [],
+//     directions: []
+// }
 
 function Recipe() {
-    const [recipe, setRecipe] = useState(RECIPE_DEFAULT);
     const { id } = useParams();
+    const [recipe, setRecipe] = useState(() => {
+        fetch(`http://localhost:8080/api/techchefs/RecipeService/${id}`)
+            .then(response => {
+                if (response.status === 200) {
+                    return response.json()
+                } else {
+                    return Promise.reject(`Unexpected status code: ${response.status}`)
+                }
+            })
+            .then(data => {
+                console.log(data)
+                return data;
+            })
+            .catch(console.log)
+    });
 
     useEffect(() => {
         fetch(`http://localhost:8080/api/techchefs/RecipeService/${id}`)
