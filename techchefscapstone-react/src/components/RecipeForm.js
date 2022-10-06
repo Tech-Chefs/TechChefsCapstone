@@ -117,7 +117,7 @@ function RecipeForm() {
     }
 
     const handleAddIngredient = (event) => {
-        const newRecipe = {...recipe, ingredients: [...recipe.ingredients, RECIPE_INGREDIENT_DEFAULT]};
+        const newRecipe = { ...recipe, ingredients: [...recipe.ingredients, RECIPE_INGREDIENT_DEFAULT] };
         setRecipe(newRecipe);
     }
 
@@ -139,7 +139,6 @@ function RecipeForm() {
         newIngredients[index].ingredient.name = event.target.value
         const newRecipe = { ...recipe, ingredients: newIngredients };
         setRecipe(newRecipe);
-        console.log(recipe)
     }
 
     const handleQuantityChange = (event, index) => {
@@ -147,7 +146,6 @@ function RecipeForm() {
         newIngredients[index].measurement.quantity = event.target.value;
         const newRecipe = { ...recipe, ingredients: newIngredients };
         setRecipe(newRecipe);
-        console.log(recipe)
     }
 
     const handleUnitChange = (event, index) => {
@@ -161,7 +159,13 @@ function RecipeForm() {
         newIngredients[index].measurement.unit.abbr = event.target.value
         const newRecipe = { ...recipe, ingredients: newIngredients };
         setRecipe(newRecipe);
-        console.log(recipe)
+    }
+
+    const handlePreparationChange = (event, index) => {
+        const newIngredients = [...recipe.ingredients];
+        newIngredients[index].preparation = event.target.value;
+        const newRecipe = { ...recipe, ingredients: newIngredients };
+        setRecipe(newRecipe);
     }
 
     const handleOptionalChange = (event, index) => {
@@ -169,7 +173,6 @@ function RecipeForm() {
         newIngredients[index].isOptional = event.target.checked;
         const newRecipe = { ...recipe, ingredients: newIngredients };
         setRecipe(newRecipe);
-        console.log(recipe)
     }
 
     const handleChange = (event) => {
@@ -306,8 +309,14 @@ function RecipeForm() {
                                     </div>
 
                                     <div className='col'>
+                                        <label htmlFor="preparation">Preparation (optional):</label>
+                                        <input id="preparation" name="preparation" type="text" value={recipeIngredient.preparation}
+                                            className="form-control shadow p-3 mb-5 bg-body rounded" onChange={(event) => handlePreparationChange(event, index)} />
+                                    </div>
+
+                                    <div className='col'>
                                         <div className="form-group">
-                                            <input id="containsEgg" name="containsEgg" type="checkbox" className="mr-2" checked={recipeIngredient.isOptional} onChange={(event) => handleOptionalChange(event, index)}/>
+                                            <input id="isOptional" name="isOptional" type="checkbox" className="mr-2" checked={recipeIngredient.isOptional} onChange={(event) => handleOptionalChange(event, index)} />
                                             <label htmlFor="tracking">optional</label>
                                         </div>
                                     </div>
