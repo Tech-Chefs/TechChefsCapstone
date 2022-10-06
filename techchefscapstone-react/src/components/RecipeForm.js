@@ -133,7 +133,7 @@ function RecipeForm() {
 
     const handleIngredientChange = (event, index) => {
         const newIngredients = [...recipe.ingredients];
-        
+
         for (let i of ingredient) {
             if (i.name === event.target.value) {
                 newIngredients[index].ingredient = i;
@@ -230,88 +230,86 @@ function RecipeForm() {
 
     return (
         <>
-            <div className="container-fluid">
-                <form onSubmit={handleSubmit}>
-                    <div className="row">
-                        <div className="col-3">
-                            <h2>Recipe Name</h2>
-                            <label htmlFor="name">Recipe:</label>
-                            <input id="name" name="name" type="text" value={recipe.name}
-                                className="form-control shadow p-3 mb-5 bg-body rounded" onChange={handleChange} />
+            <div className='recipeFormBody'>
+                <div className="container ">
+                    <form onSubmit={handleSubmit}>
+                        <div className="row">
+                            <div className="col">
+                                <label htmlFor="name"><h3>Recipe Name:</h3></label>
+                                <input id="name" name="name" type="text" value={recipe.name}
+                                    className="form-control shadow p-3 mb-5 bg-body rounded" onChange={handleChange} />
+                            </div>
                         </div>
-                        <div className="col-6 mb-3">
-                            <h2>Description</h2>
-                            <label htmlFor="exampleFormControlTextarea1" className="form-label">Example textarea</label>
-                            <textarea className="form-control shadow p-3 mb-3 bg-body rounded" id="description" name="description" rows="3" onChange={handleChange}></textarea>
+                        <div className='row'>
+                            <div className="col">
+                                <label htmlFor="exampleFormControlTextarea1" className="form-label"> <h3>Description:</h3></label>
+                                <textarea className="form-control shadow p-3 mb-3 bg-body rounded" id="description" name="description" onChange={handleChange}></textarea>
+                            </div>
                         </div>
-                    </div>
 
-                    <div className="row">
-                        <div className="col-3"></div> {/*for placement design */}
+                        <div className="row">
+                            <div className="col">
+                                <h3>Ingredients</h3>
+                                {recipe.ingredients.map((recipeIngredient, index) => (
+                                    <section className="row" id="ingre">
+                                        <div className='col'>
+                                            <label htmlFor="exampleDataList" className="form-label">Ingredient</label>
+                                            <input className="form-control shadow p-3 mb-3 bg-body rounded" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." key={recipeIngredient.ingredient.id} value={recipeIngredient.ingredient.name} name="ingredient" onChange={(event) => handleIngredientChange(event, index)} />
+                                            <datalist id="datalistOptions">
+                                                {
+                                                    ingredient.map(i => (
+                                                        <option key={i.id} value={i.name}></option>
+                                                    ))}
+                                            </datalist>
+                                        </div>
 
-                        <div className="col-6">
-                            <h2>Ingredients</h2>
-                            {recipe.ingredients.map((recipeIngredient, index) => (
-                                <section className="row" id="ingre">
-                                    <div className='col'>
-                                        <label htmlFor="exampleDataList" className="form-label">Ingredient</label>
-                                        <input className="form-control shadow p-3 mb-3 bg-body rounded" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." key={recipeIngredient.ingredient.id} value={recipeIngredient.ingredient.name} name="ingredient" onChange={(event) => handleIngredientChange(event, index)}/>
-                                        <datalist id="datalistOptions">
-                                            {
-                                                ingredient.map(i => (
-                                                    <option key={i.id} value={i.name}></option>
-                                                ))}
-                                        </datalist>
-                                    </div>
+                                        <div className='col'>
+                                            <label>Measurement</label>
+                                            <input type="number" className="form-control shadow p-3 mb-3 bg-body rounded" id="exampleFormControlInput1" placeholder="0" value={recipeIngredient.measurement.quantity} />
+                                        </div>
 
-                                    <div className='col'>
-                                        <label>Measurement</label>
-                                        <input type="number" className="form-control shadow p-3 mb-3 bg-body rounded" id="exampleFormControlInput1" placeholder="0" value={recipeIngredient.measurement.quantity} />
-                                    </div>
+                                        <div className='col'>
+                                            <label htmlFor="exampleDataList" className="form-label" value={recipeIngredient.measurement.unit}>Unit</label>
+                                            <select id="unitListOptions" className='form-control shadow p-3 mb-3 bg-body rounded'>
+                                                {
+                                                    unit.map(u => (
+                                                        <option key={u.id} value={u.abbr}>{u.abbr}</option>
+                                                    ))}
+                                            </select>
+                                        </div>
 
-                                    <div className='col'>
-                                        <label htmlFor="exampleDataList" className="form-label" value={recipeIngredient.measurement.unit}>Unit</label>
-                                        <select id="unitListOptions" className='form-control shadow p-3 mb-3 bg-body rounded'>
-                                            {
-                                                unit.map(u => (
-                                                    <option key={u.id} value={u.abbr}>{u.abbr}</option>
-                                                ))}
-                                        </select>
-                                    </div>
-
+                                    </section>
+                                ))}
+                                <Link className="ingreButton btn btn-primary" to="/ingredient">Create New Ingredient</Link>
+                            </div>
+                        </div>
+                        <div className="row" id='directionForm'>
+                            <div className="col">
+                                <section className='directionSec'>
+                                    <h3>Directions</h3>
+                                    <ol>
+                                        {recipe.directions.map((direction, index) => (
+                                            <li key={index}>
+                                                <textarea className="form-control shadow p-3 mb-3 bg-body rounded" id="exampleFormControlTextarea1" value={direction} onChange={(event) => handleDirectionChange(event, index)}></textarea>
+                                            </li>
+                                        ))}
+                                    </ol>
                                 </section>
-                            ))}
-                            <Link className="ingreButton btn btn-secondary" to="/ingredient">Add Ingredient</Link>
-                        </div>
-                    </div>
-                    <div className="row" id='directionForm'>
-                        <div className="col-3"></div>
-                        <div className="col-6">
-                            <section>
-                                <h2>Directions</h2>
-                                <ol>
-                                    {recipe.directions.map((direction, index) => (
-                                        <li key={index}>
-                                            <textarea className="form-control shadow p-3 mb-3 bg-body rounded" id="exampleFormControlTextarea1" rows="3" value={direction} onChange={(event) => handleDirectionChange(event, index)}></textarea>
-                                        </li>
-                                    ))}
-                                </ol>
-                            </section>
-                            <button className="directionBtn btn btn-secondary" onClick={handleAddDirection} type='button'>Add Direction</button>
-                        </div>
+                                <button className="directionBtn btn btn-secondary" onClick={handleAddDirection} type='button'>Add Direction</button>
+                            </div>
 
-                    </div>
-                    <div className="submitCancel mt-4">
-                        <button className="btn btn-primary mr-2" type="submit">
-                            <i className="bi bi-file-earmark-check"></i>
-                            {id ? " Update Recipe" : " Add Recipe"}
-                        </button>
-                        <Link className='btn btn-danger' to="/recipes">
-                            <i className='bi bi-stoplights'></i> Cancel
-                        </Link>
-                    </div>
-                </form>
-
+                        </div>
+                        <div className="submitCancel mt-4">
+                            <button className="btn btn-primary mr-2" type="submit">
+                                <i className="bi bi-file-earmark-check"></i>
+                                {id ? " Update Recipe" : " Add Recipe"}
+                            </button>
+                            <Link className='btn btn-danger' to="/recipes">
+                                <i className='bi bi-stoplights'></i> Cancel
+                            </Link>
+                        </div>
+                    </form>
+                </div>
             </div>
         </>
     )
