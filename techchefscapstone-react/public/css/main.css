@@ -1,5 +1,9 @@
 /* HOME PAGE CSS */
 
+nav{
+  background-color: #E9E4D1;
+}
+
 .navbar-nav {
   display: flex;
   justify-content: space-evenly;
@@ -19,7 +23,7 @@
 }
 
 .homebody {
-  background:url(../images/) no-repeat center center fixed;
+  background:url(../images/pexels-photo-1028599.jpeg) no-repeat center center fixed;
   background-size: cover;
   background-position: center;
   display: flex;
@@ -38,7 +42,16 @@ h1 {
   font-size: 64px;
 }
 
+.welcome {
+  color: #F47D38;
+  text-shadow:3px 3px 3px rgba(0, 0, 0, 0.61);
+  transition:.5s;
+}
 
+.welcome:hover{
+  transform: scale(1.5);
+  color: #FFB229;
+}
 
 
 
@@ -48,15 +61,19 @@ h1 {
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin-top: 200px;
+  background:url(../images/pexels-photo-5677627.jpeg) no-repeat center center fixed;
+  background-size: cover;
+  background-position: center;
+  height: 100vh; 
 }
 
 .loginButton {
   text-align: center;
 }
 
-
-
+.security {
+  margin-top: 250px;
+}
 
 
 /* PROFILE CSS */
@@ -119,23 +136,6 @@ h1 {
 
 
 
-
-
-/* CREATE A RECIPE CSS */
-
-.ingreButton {
-  height: fit-content;
-  float: right;
-}
-
-
-
-/* CREATE A INGREDIENT CSS */
-
-
-
-
-
 /* RECIPE LIST CSS */
 .heroSection {
   text-align: center;
@@ -144,7 +144,6 @@ h1 {
 .card {
   width: 30rem;
 }
-
 
 
 
@@ -159,4 +158,27 @@ h1 {
 #ingredients {
   text-align: center;
   font-family: 'Roboto', sans-serif;
+}
+
+.ingreButton {
+  height: fit-content;
+  float: right;
+}
+
+#directionForm{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.directionBtn {
+  float: right;
+}
+
+.submitCancel {
+  text-align: center;
+}
+
+h2 {
+  font-family: 'Libre Baskerville', serif;
 }

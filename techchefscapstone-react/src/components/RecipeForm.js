@@ -237,12 +237,12 @@ function RecipeForm() {
                             <h2>Recipe Name</h2>
                             <label htmlFor="name">Recipe:</label>
                             <input id="name" name="name" type="text" value={recipe.name}
-                                className="form-control" onChange={handleChange} />
+                                className="form-control shadow p-3 mb-5 bg-body rounded" onChange={handleChange} />
                         </div>
                         <div className="col-6 mb-3">
                             <h2>Description</h2>
                             <label htmlFor="exampleFormControlTextarea1" className="form-label">Example textarea</label>
-                            <textarea className="form-control" id="description" name="description" rows="3" onChange={handleChange}></textarea>
+                            <textarea className="form-control shadow p-3 mb-3 bg-body rounded" id="description" name="description" rows="3" onChange={handleChange}></textarea>
                         </div>
                     </div>
 
@@ -255,7 +255,7 @@ function RecipeForm() {
                                 <section className="row" id="ingre">
                                     <div className='col'>
                                         <label htmlFor="exampleDataList" className="form-label">Ingredient</label>
-                                        <input className="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." key={recipeIngredient.ingredient.id} value={recipeIngredient.ingredient.name} name="ingredient" onChange={(event) => handleIngredientChange(event, index)} style={{backgroundColor:"red"}}/>
+                                        <input className="form-control shadow p-3 mb-3 bg-body rounded" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." key={recipeIngredient.ingredient.id} value={recipeIngredient.ingredient.name} name="ingredient" onChange={(event) => handleIngredientChange(event, index)}/>
                                         <datalist id="datalistOptions">
                                             {
                                                 ingredient.map(i => (
@@ -266,12 +266,12 @@ function RecipeForm() {
 
                                     <div className='col'>
                                         <label>Measurement</label>
-                                        <input type="number" className="form-control" id="exampleFormControlInput1" placeholder="0" value={recipeIngredient.measurement.quantity} />
+                                        <input type="number" className="form-control shadow p-3 mb-3 bg-body rounded" id="exampleFormControlInput1" placeholder="0" value={recipeIngredient.measurement.quantity} />
                                     </div>
 
                                     <div className='col'>
                                         <label htmlFor="exampleDataList" className="form-label" value={recipeIngredient.measurement.unit}>Unit</label>
-                                        <select id="unitListOptions" className='form-control'>
+                                        <select id="unitListOptions" className='form-control shadow p-3 mb-3 bg-body rounded'>
                                             {
                                                 unit.map(u => (
                                                     <option key={u.id} value={u.abbr}>{u.abbr}</option>
@@ -284,26 +284,29 @@ function RecipeForm() {
                             <Link className="ingreButton btn btn-secondary" to="/ingredient">Add Ingredient</Link>
                         </div>
                     </div>
-                    <div className="row">
+                    <div className="row" id='directionForm'>
                         <div className="col-3"></div>
                         <div className="col-6">
-                            <h2>Directions</h2>
-                            <ol>
-                                {recipe.directions.map((direction, index) => (
-                                    <li key={index}>
-                                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" value={direction} onChange={(event) => handleDirectionChange(event, index)}></textarea>
-                                    </li>
-                                ))}
-                            </ol>
+                            <section>
+                                <h2>Directions</h2>
+                                <ol>
+                                    {recipe.directions.map((direction, index) => (
+                                        <li key={index}>
+                                            <textarea className="form-control shadow p-3 mb-3 bg-body rounded" id="exampleFormControlTextarea1" rows="3" value={direction} onChange={(event) => handleDirectionChange(event, index)}></textarea>
+                                        </li>
+                                    ))}
+                                </ol>
+                            </section>
+                            <button className="directionBtn btn btn-secondary" onClick={handleAddDirection} type='button'>Add Direction</button>
                         </div>
-                        <button className="ingreButton btn btn-secondary" onClick={handleAddDirection} type='button'>Add Direction</button>
+
                     </div>
-                    <div className="mt-4">
-                        <button className="btn btn-success mr-2" type="submit">
+                    <div className="submitCancel mt-4">
+                        <button className="btn btn-primary mr-2" type="submit">
                             <i className="bi bi-file-earmark-check"></i>
                             {id ? " Update Recipe" : " Add Recipe"}
                         </button>
-                        <Link className='btn btn-warning' to="/recipes">
+                        <Link className='btn btn-danger' to="/recipes">
                             <i className='bi bi-stoplights'></i> Cancel
                         </Link>
                     </div>
