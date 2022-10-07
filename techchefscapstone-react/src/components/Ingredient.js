@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { Link, useHistory, useParams } from 'react-router-dom';
+import AuthContext from '../AuthContext';
 
 
 const INGREDIENTS_DEFAULT = {
@@ -24,6 +25,7 @@ function Ingredient() {
     const [ingredient, setIngredient] = useState(INGREDIENTS_DEFAULT);
     const [errors, setErrors] = useState([]);
     const { id } = useParams();
+    const auth = useContext(AuthContext);   
 
     useEffect(() => {
         if (id) {

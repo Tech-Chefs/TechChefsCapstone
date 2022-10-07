@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { Link, useHistory, useParams } from 'react-router-dom';
+import AuthContext from '../AuthContext';
 
 const RECIPE_INGREDIENT_DEFAULT = {
     ingredient: { id: 0, name: "" },
@@ -28,6 +29,7 @@ function RecipeForm() {
     const { id } = useParams();
     const [ingredient, setIngredient] = useState([]);
     const [unit, setUnit] = useState([]);
+    const auth = useContext(AuthContext);   
 
     useEffect(() => {
         fetch("http://localhost:8080/api/techchefs/IngredientService")
