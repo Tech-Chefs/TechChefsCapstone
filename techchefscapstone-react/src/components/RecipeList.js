@@ -38,6 +38,14 @@ function RecipeList() {
                             <Link to={`/recipe/${recipe.id}`} className="btn btn-primary" onClick={() => handleViewRecipe(recipe.id)}>
                                 <i className="bi bi-binoculars"> View Recipe </i>
                             </Link>
+                            <div className="float-right mr-2">
+                                <Link className="btn btn-primary btn-sm mr-2" to={`/recipe/edit/${recipe.id}`}>
+                                    <i className="bi bi-pencil-square"></i> Edit
+                                </Link>
+                                <button className="btn btn-danger btn-sm" onClick={() => handleDeletePanel(recipe.id)}>
+                                    <i className="bi bi-trash"></i> Delete
+                                </button>
+                            </div>
                         </div>
                     </div>
                 ))}
