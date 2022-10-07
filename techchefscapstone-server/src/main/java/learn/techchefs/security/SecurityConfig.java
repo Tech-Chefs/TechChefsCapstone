@@ -30,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.PUT,
                         "/api/techchefs/RecipeService/*","/api/techchefs/IngredientService/*").hasAnyRole("USER", "ADMIN")
                 .antMatchers(HttpMethod.DELETE,
-                        "/api/techchefs/*").hasAnyRole("ADMIN")
+                        "/api/techchefs/RecipeService/*").hasAnyRole("ADMIN")
                 // if we get to this point, let's deny all requests
                 .antMatchers("/**").denyAll()
                 .and()

@@ -121,12 +121,14 @@ h1 {
 
 #items {
   border: solid;
-  height: 400px;
+  height: fit-content;
+  padding: 20px;
 }
 
 #instructions {
   border: solid;
-  height: 400px;
+  height: fit-content;
+  padding: 20px;
 }
 
 .header {
@@ -134,26 +136,46 @@ h1 {
   font-family: 'Libre Baskerville', serif
 }
 
-
-
-/* RECIPE LIST CSS */
-.heroSection {
+#maxRecipeName {
+  font-size: 3vw;
   text-align: center;
 }
 
-.card {
-  width: 30rem;
+#content {
+  display: flex;
+  align-items: center;
 }
 
-
-
-/* RECIPE FORM CSS */
 #legend {
   display: flex;
   flex-direction: column;
   text-align: center;
   background-color: #F7C783;
 }
+
+
+/* RECIPE LIST CSS */
+.heroSection {
+  text-align: center;
+  
+}
+
+.card {
+  width: 30rem;
+  margin: 30px 0px;
+  height: fit-content;
+}
+
+#cardContainer {
+  display:flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+ 
+}
+
+
+/* RECIPE FORM CSS */
+
 
 #ingredients {
   text-align: center;

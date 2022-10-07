@@ -19,7 +19,7 @@ const RECIPE_DEFAULT =
     name: "",
     description: "",
     directions: [""],
-    ingredients: [RECIPE_INGREDIENT_DEFAULT]
+    ingredients: [{...RECIPE_INGREDIENT_DEFAULT}]
 }
 
 function RecipeForm() {
@@ -65,9 +65,8 @@ function RecipeForm() {
     }
 
     const handleAddIngredient = (event) => {
-        const newRecipe = { ...recipe, ingredients: [...recipe.ingredients, RECIPE_INGREDIENT_DEFAULT] };
+        const newRecipe = { ...recipe, ingredients: [...recipe.ingredients, {...RECIPE_INGREDIENT_DEFAULT}] };
         setRecipe(newRecipe);
-        console.log(recipe)
     }
 
     const handleDirectionChange = (event, index) => {
@@ -151,7 +150,8 @@ function RecipeForm() {
         const init = {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${auth.user.token}`
             },
             body: JSON.stringify(recipe)
         }
@@ -181,7 +181,8 @@ function RecipeForm() {
         const init = {
             method: "PUT",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${auth.user.token}`
             },
             body: JSON.stringify(recipe)
         }
@@ -223,7 +224,7 @@ function RecipeForm() {
                         <div className='row'>
                             <div className="col">
                                 <label htmlFor="exampleFormControlTextarea1" className="form-label"><h3>Description:</h3></label>
-                                <textarea className="form-control shadow p-3 mb-3 bg-body rounded" id="description" name="description" onChange={handleChange}></textarea>
+                                <textarea className="form-control shadow p-3 mb-3 bg-body rounded" id="description" name="description" onChange={handleChange} value={recipe.description}></textarea>
                             </div>
                         </div>
 

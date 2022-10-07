@@ -20,7 +20,6 @@ const INGREDIENTS_DEFAULT = {
     gluten: "Gluten Free"
 }
 
-
 function Ingredient() {
     const [ingredient, setIngredient] = useState(INGREDIENTS_DEFAULT);
     const [errors, setErrors] = useState([]);
@@ -119,7 +118,8 @@ function Ingredient() {
         const init = {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${auth.user.token}`
             },
             body: JSON.stringify(ingredient)
         }
@@ -149,7 +149,8 @@ function Ingredient() {
         const init = {
             method: "PUT",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${auth.user.token}`
             },
             body: JSON.stringify(ingredient)
         }
@@ -214,12 +215,12 @@ function Ingredient() {
                                             <option>Seafood</option>
                                         </select>
                                     </div>
-                                    <div className="form-group" /*style={{ display: 'none' }}*/>
+                                    <div className="form-group">
                                         <input id="containsEgg" name="containsEgg" type="checkbox" className="mr-2" checked={ingredient.containsEgg}
                                             onChange={handleChange} disabled={ingredient.diet === "Vegan"} />
                                         <label htmlFor="tracking">Contains Egg?</label>
                                     </div>
-                                    <div className="form-group" /*style={{ display: 'none' }}*/>
+                                    <div className="form-group">
                                         <input id="containsDairy" name="containsDairy" type="checkbox" className="mr-2" checked={ingredient.containsDairy}
                                             onChange={handleChange} disabled={ingredient.diet === "Vegan"} />
                                         <label htmlFor="tracking">Contains Dairy?</label>

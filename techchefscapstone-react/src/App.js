@@ -29,7 +29,9 @@ function App() {
     });
   }
 
-  const logout = () => setUser(null);
+  const logout = () => {
+    setUser(null);
+  }
 
   const auth = { user, login, logout };
 

@@ -15,17 +15,14 @@ function Recipe() {
                 }
             })
             .then(data => {
-                console.log(data)
                 setRecipe(data)
             })
             .catch(console.log)
     }, [id])
 
     const renderRecipe = () => {
-        console.log(recipe)
         let name = recipe.name;
         let description = recipe.description;
-        console.log(recipe.directions)
 
         let directions = recipe.directions.map(dir => {
             return (
@@ -50,14 +47,9 @@ function Recipe() {
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-12">
-                        <h1>{name}</h1>
-                        <div className="row">
-                            <div className="col">
-                                <section id="recipeCarousel">Recipe Carousel</section>
-                            </div>
-                        </div>
+                        <h1 id="maxRecipeName">{name}</h1>
                     </div>
-                    <div className="row">
+                    <div className="row" id="content">
                         <div className="col">
                             <section id="items">
                                 <h2 className="header">Ingredients</h2>

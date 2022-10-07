@@ -2,6 +2,8 @@ package learn.techchefs.domain;
 
 import learn.techchefs.data.AppUserRepository;
 import learn.techchefs.models.AppUser;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -20,6 +22,15 @@ public class AppUserService implements UserDetailsService {
         this.repository = repository;
         this.encoder = encoder;
     }
+
+    public Result <Integer> findIdByUsername (String username) {
+        Result <Integer> result = new Result<>();
+        AppUser user = repository.findByUsername(username);
+        if (user == null) result.addMessage(String.format("User %s not found", username), ResultType.NOT_FOUND);
+        else result.setPayload(user.getAppUserId());
+        return result;
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         AppUser appUser = repository.findByUsername(username);
