@@ -49,7 +49,7 @@ public class IngredientServiceController {
         if (result.getResultType() == ResultType.INVALID) {
             return new ResponseEntity<>(result.getMessages(), HttpStatus.BAD_REQUEST); // 400
         }
-        return new ResponseEntity<>(result.getMessages(), HttpStatus.CREATED); // 201
+        return new ResponseEntity<>(result.getPayload(), HttpStatus.CREATED); // 201
     }
 
     @PutMapping("/{id}")

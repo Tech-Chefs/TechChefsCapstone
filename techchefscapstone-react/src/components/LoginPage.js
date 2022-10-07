@@ -59,7 +59,7 @@ export default function LoginPage() {
     return (
         <>
             <body className="loginBody">
-                <form className="security">
+                <form className="security" onSubmit={handleSubmit}>
                     <input className="form-control-lg" type="username" placeholder="Username" onChange={handleUsernameChange} value={username} ></input>
 
                     <br></br>

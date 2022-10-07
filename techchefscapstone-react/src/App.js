@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React, { useState } from 'react';
+import jwt_decode from 'jwt-decode';
 import Home from './components/Home';
 import LoginPage from './components/LoginPage';
 import Navbar from './components/Navbar';
@@ -9,10 +11,31 @@ import RecipeForm from './components/RecipeForm';
 import ProfilePage from './components/ProfilePage';
 import Recipe from './components/Recipe';
 import Ingredient from './components/Ingredient';
+import AuthContext from './AuthContext';
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  const login = (token) => {
+    const decodedToken = jwt_decode(token);
+
+    setUser({
+      username: decodedToken.sub,
+      roles: decodedToken.authorities.split(","),
+      token,
+      hasRole(role){
+        return this.roles.includes(role);
+      }
+    });
+  }
+
+  const logout = () => setUser(null);
+
+  const auth = { user, login, logout };
+
+
   return (
-    <>
+    <AuthContext.Provider value={auth}>
       <Router>
         <Navbar />
         <Switch>
@@ -55,7 +78,7 @@ function App() {
 
         </Switch>
       </Router>
-    </>
+    </AuthContext.Provider>
   );
 }
 

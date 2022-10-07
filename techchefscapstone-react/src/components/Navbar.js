@@ -1,6 +1,10 @@
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import AuthContext from '../AuthContext';
 
 function Navbar() {
+    const auth = useContext(AuthContext);
+
     return (
         <nav className="navbar navbar-expand-lg bg-light">
             <div className='container-fluid'>
@@ -16,7 +20,10 @@ function Navbar() {
                     <li className='nav-item'><Link className="nav-link" to="/">Home</Link></li>
                     <li className='nav-item'><Link className="nav-link" to="/recipe/add">Create</Link></li>
                     <li className='nav-item'><Link className="nav-link" to="/recipes">Recipes List</Link></li>
-                    <li className='nav-item'><Link type="button" className="btn btn-primary btn-lg" to="/loginpage">Login</Link></li>
+                    {auth.user ? 
+                    (<li className='nav-item'><button type='button' className="btn btn-danger btn-lg" onClick={() => auth.logout()}>Logout</button></li>) :
+                    (<li className='nav-item'><Link type="button" className="btn btn-primary btn-lg" to="/loginpage">Login</Link></li>)
+                }
                 </ul>
             </div>
         </nav>
