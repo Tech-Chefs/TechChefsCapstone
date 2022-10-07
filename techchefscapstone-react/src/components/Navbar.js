@@ -22,7 +22,7 @@ function Navbar() {
                     {auth.user ?
                         (<>
                             <li className='nav-item'><Link className="nav-link" to="/recipe/add">Create</Link></li>
-                            <li className='nav-item'>Welcome {auth.user}</li>
+                            <li className='nav-item'>Welcome {auth.user.username}</li>
                             <li className='nav-item'><button type='button' className="btn btn-danger btn-lg" onClick={() => auth.logout()}>Logout</button></li></>) :
                         (<li className='nav-item'><Link type="button" className="btn btn-primary btn-lg" to="/loginpage">Login</Link></li>)
                     }
