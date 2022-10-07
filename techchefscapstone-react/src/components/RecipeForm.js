@@ -19,7 +19,7 @@ const RECIPE_DEFAULT =
     name: "",
     description: "",
     directions: [""],
-    ingredients: [{...RECIPE_INGREDIENT_DEFAULT}]
+    ingredients: [{...RECIPE_INGREDIENT_DEFAULT, measurement:{...RECIPE_INGREDIENT_DEFAULT.measurement}}]
 }
 
 function RecipeForm() {
@@ -102,7 +102,7 @@ function RecipeForm() {
 
         for (let u of unit) {
             if (u.abbr === event.target.value) {
-                newIngredients[index].measurement.unit = u;
+                newIngredients[index].measurement.unit = {...u};
             }
         }
         newIngredients[index].measurement.unit.abbr = event.target.value
