@@ -65,7 +65,7 @@ function RecipeForm() {
     }
 
     const handleAddIngredient = (event) => {
-        const newRecipe = { ...recipe, ingredients: [...recipe.ingredients, {...RECIPE_INGREDIENT_DEFAULT}] };
+        const newRecipe = { ...recipe, ingredients: [...recipe.ingredients, {...RECIPE_INGREDIENT_DEFAULT, measurement:{...RECIPE_INGREDIENT_DEFAULT.measurement}}] };
         setRecipe(newRecipe);
     }
 
